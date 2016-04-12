@@ -1,7 +1,6 @@
 <?php
-
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'VerteXVaaR LogThunder',
+    'title' => 'VerteXVaaR Logs',
     'description' => 'TYPO3 Logging API reading module and devlog extension in one',
     'category' => 'module',
     'constraints' => [
