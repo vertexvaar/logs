@@ -1,0 +1,15 @@
+{
+  "name": "vertexvaar/logthunder",
+  "type": "typo3-cms-extension",
+  "description": "TYPO3 Logging API reading module and devlog extension in one",
+  "license": "GPL-2.0+",
+  "autoload": {
+    "psr-4": {
+      "VerteXVaaR\\LogTunder\\": "Classes/"
+    }
+  },
+  "require": {
+    "php": "^5.5",
+    "typo3/cms": "^7.6"
+  }
+}
