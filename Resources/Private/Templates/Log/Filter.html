@@ -1,0 +1,30 @@
+<f:layout name="Backend"/>
+
+<f:section name="LeftToolBar"></f:section>
+<f:section name="RightToolBar"></f:section>
+<f:section name="Welcome"></f:section>
+
+<f:section name="Main">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>requestId</th>
+				<th>timeMicro</th>
+				<th>component</th>
+				<th>level</th>
+				<th>message</th>
+				<th>data</th>
+			</tr>
+		</thead>
+		<f:for each="{logs}" as="log">
+			<tr>
+				<td>{log.requestId}</td>
+				<td>{log.timeMicro}</td>
+				<td>{log.component}</td>
+				<td>{log.level}</td>
+				<td>{log.message}</td>
+				<td>{log.data -> f:debug(inline:'true')}</td>
+			</tr>
+		</f:for>
+	</table>
+</f:section>

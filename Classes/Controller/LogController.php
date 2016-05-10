@@ -1,27 +1,29 @@
 <?php
 namespace VerteXVaaR\Logs\Controller;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use VerteXVaaR\Logs\Service\LogConfigurationService;
+use VerteXVaaR\Logs\Helper\LoggingTrait;
+use VerteXVaaR\Logs\Log\ConjunctionReaderFactory;
+use VerteXVaaR\Logs\Log\Reader\ReaderInterface;
 
 /**
  * Class LogController
  */
 class LogController extends ActionController
 {
-    /**
-     * @var LogConfigurationService
-     */
-    protected $logConfigurationService = null;
+    use LoggingTrait;
 
     /**
-     * LogController constructor.
+     * @var ReaderInterface
      */
-    public function __construct()
+    protected $reader = null;
+
+    /**
+     *
+     */
+    public function initializeObject()
     {
-        parent::__construct();
-        $this->logConfigurationService = GeneralUtility::makeInstance(LogConfigurationService::class);
+        $this->reader = ConjunctionReaderFactory::fromConfiguration();
     }
 
     /**
@@ -29,11 +31,6 @@ class LogController extends ActionController
      */
     public function filterAction()
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(
-            $this->logConfigurationService->getAllLogTables(),
-            __CLASS__ . '@' . __LINE__,
-            20
-        );
-        die;
+        $this->view->assign('logs', $this->reader->findAll());
     }
 }

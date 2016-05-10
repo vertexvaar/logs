@@ -2,58 +2,54 @@
 namespace VerteXVaaR\Logs\Service;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
-use TYPO3\CMS\Core\SingletonInterface;
+use VerteXVaaR\Logs\Log\Reader\DatabaseReader;
 
 /**
  * Class LogConfigurationService
  */
-class LogConfigurationService implements SingletonInterface
+class LogConfigurationService
 {
     /**
      * @var array
      */
-    protected $configuration = [];
+    protected $writerToReaderMapping = [
+        DatabaseWriter::class => DatabaseReader::class,
+    ];
 
     /**
-     * LogConfigurationService constructor.
+     * @param array|null $logConfiguration
+     * @return array
      */
-    public function __construct()
+    public function getReaderCollection(array $logConfiguration = null)
     {
-        $this->configuration = $this->getConfigurationFromGlobals();
-    }
+        if (null === $logConfiguration) {
+            $logConfiguration = $this->getLogConfiguration();
+        }
 
-    /**
-     * @param array|null $configuration
-     * @return mixed
-     */
-    public function getAllLogTables(array $configuration = null)
-    {
-        if (null === $configuration) {
-            $logTables = $this->getAllLogTables($this->configuration);
-        } else {
-            $logTables = [];
-            foreach ($configuration as $key => $value) {
-                if ('writerConfiguration' === $key) {
+        $logReader = [];
+        foreach ($logConfiguration as $key => $value) {
+            if (is_array($value)) {
+                if ('writerConfiguration' !== $key) {
+                    $logReader = array_merge($logReader, $this->getReaderCollection($value));
+                } else {
                     foreach ($value as $writer) {
                         foreach ($writer as $class => $writerConfiguration) {
-                            if (DatabaseWriter::class === $class) {
-                                $logTables[] = $writerConfiguration['logTable'];
+                            if (isset($this->writerToReaderMapping[$class])) {
+                                $logReader[] = new $this->writerToReaderMapping[$class]($writerConfiguration);
                             }
                         }
                     }
-                } else {
-                    $logTables = array_merge($logTables, $this->getAllLogTables($value));
                 }
             }
         }
-        return $logTables;
+        return $logReader;
     }
 
     /**
      * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected function getConfigurationFromGlobals()
+    protected function getLogConfiguration()
     {
         return $GLOBALS['TYPO3_CONF_VARS']['LOG'];
     }
