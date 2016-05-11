@@ -55,7 +55,7 @@ class DatabaseReader implements ReaderInterface
     public function findByFilter(Filter $filter)
     {
         $where = [
-            'level<=' . $filter->getMinimumSeverity(),
+            'level<=' . $filter->getLevel(),
             'message IS NOT NULL',
         ];
         if (!empty(($requestId = $filter->getRequestId()))) {

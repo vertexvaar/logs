@@ -2,9 +2,6 @@
 <xliff version="1.0">
     <file source-language="en" datatype="plaintext" original="messages" product-name="logs">
         <body>
-            <trans-unit id="filter.minimum_severity">
-                <source>Minimum severity</source>
-            </trans-unit>
             <trans-unit id="filter.request_id">
                 <source>Request ID</source>
             </trans-unit>

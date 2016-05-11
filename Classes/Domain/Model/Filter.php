@@ -17,7 +17,7 @@ class Filter
     /**
      * @var int
      */
-    protected $minimumSeverity = LogLevel::NOTICE;
+    protected $level = LogLevel::NOTICE;
 
     /**
      * @var int
@@ -78,17 +78,17 @@ class Filter
     /**
      * @return int
      */
-    public function getMinimumSeverity()
+    public function getLevel()
     {
-        return (int)$this->minimumSeverity;
+        return (int)$this->level;
     }
 
     /**
-     * @param int $minimumSeverity
+     * @param int $level
      */
-    public function setMinimumSeverity($minimumSeverity)
+    public function setLevel($level)
     {
-        $this->minimumSeverity = $minimumSeverity;
+        $this->level = $level;
     }
 
     /**
@@ -245,6 +245,7 @@ class Filter
             'time_micro' => LocalizationUtility::translate('filter.time_micro', 'logs'),
             'request_id' => LocalizationUtility::translate('filter.request_id', 'logs'),
             'component' => LocalizationUtility::translate('filter.component', 'logs'),
+            'level' => LocalizationUtility::translate('filter.level', 'logs'),
         ];
     }
 
