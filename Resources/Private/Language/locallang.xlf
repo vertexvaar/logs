@@ -14,6 +14,18 @@
             <trans-unit id="filter.end_time">
                 <source>End time</source>
             </trans-unit>
+            <trans-unit id="filter.show_data">
+                <source>Show data</source>
+            </trans-unit>
+            <trans-unit id="filter.component">
+                <source>Component</source>
+            </trans-unit>
+            <trans-unit id="filter.crop_message">
+                <source>Crop messages</source>
+            </trans-unit>
+            <trans-unit id="verbosity">
+                <source>Verbosity</source>
+            </trans-unit>
             <trans-unit id="search">
                 <source>Search</source>
             </trans-unit>

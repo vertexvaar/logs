@@ -29,6 +29,21 @@ class Filter
     protected $toTime = 0;
 
     /**
+     * @var bool
+     */
+    protected $showData = false;
+
+    /**
+     * @var string
+     */
+    protected $component = '';
+
+    /**
+     * @var bool
+     */
+    protected $cropMessage = false;
+
+    /**
      * @return string
      */
     public function getRequestId()
@@ -90,6 +105,54 @@ class Filter
     public function setToTime($toTime)
     {
         $this->toTime = $toTime;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isShowData()
+    {
+        return $this->showData;
+    }
+
+    /**
+     * @param boolean $showData
+     */
+    public function setShowData($showData)
+    {
+        $this->showData = $showData;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComponent()
+    {
+        return $this->component;
+    }
+
+    /**
+     * @param string $component
+     */
+    public function setComponent($component)
+    {
+        $this->component = $component;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCropMessage()
+    {
+        return $this->cropMessage;
+    }
+
+    /**
+     * @param boolean $cropMessage
+     */
+    public function setCropMessage($cropMessage)
+    {
+        $this->cropMessage = $cropMessage;
     }
 
     /**

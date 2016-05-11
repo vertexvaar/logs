@@ -29,6 +29,29 @@
 			</div>
 		</fieldset>
 		<fieldset class="form-section">
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label><f:translate key="verbosity">verbosity</f:translate></label>
+					<div class="checkbox">
+						<label for="tx_logs_filter_show_data">
+							<f:form.checkbox property="showData" value="1" id="tx_logs_filter_show_data"/>
+							<f:translate key="filter.show_data">show data</f:translate>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label for="tx_logs_filter_crop_message">
+							<f:form.checkbox property="cropMessage" value="1" id="tx_logs_filter_crop_message"/>
+							<f:translate key="filter.crop_message">crop message</f:translate>
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="tx_logs_filter_component"><f:translate key="filter.component">component</f:translate></label>
+					<f:form.textfield property="component" id="tx_logs_filter_component" class="form-control form-control-adapt"/>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-section">
 			<div class="form-group">
 				<f:form.submit value="{f:translate(key:'search',default:'search')}" class="form-control form-control-adapt"/>
 			</div>
@@ -44,17 +67,17 @@
 				<th>component</th>
 				<th>level</th>
 				<th>message</th>
-				<th>data</th>
+				<f:if condition="{filter.showData}"><th>data</th></f:if>
 			</tr>
 		</thead>
 		<f:for each="{logs}" as="log">
 			<tr>
 				<td>{log.requestId}</td>
-				<td><logs:format.microtime microTime="{log.timeMicro}"/> ({log.timeMicro})</td>
+				<td><logs:format.microtime microTime="{log.timeMicro}"/><br/>({log.timeMicro})</td>
 				<td>{log.component}</td>
 				<td>{log.level}</td>
 				<td>{log.message}</td>
-				<td>{log.data -> f:debug(inline:'true')}</td>
+				<f:if condition="{filter.showData}"><td>{log.data -> f:debug(inline:'true')}</td></f:if>
 			</tr>
 		</f:for>
 	</table>

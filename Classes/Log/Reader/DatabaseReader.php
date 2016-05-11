@@ -19,7 +19,7 @@ class DatabaseReader implements ReaderInterface
     /**
      * @var string
      */
-    protected $selectFields = 'request_id,time_micro,component,level,message,data';
+    protected $selectFields = 'request_id,time_micro,component,level';
 
     /**
      * DatabaseReader constructor.
@@ -68,10 +68,17 @@ class DatabaseReader implements ReaderInterface
             // Add +1 to the timestamp to ignore microseconds when comparing. UX stuff, you know ;)
             $where[] = sprintf('time_micro <= %d', $this->getDatabase()->escapeStrForLike($toTime + 1, 'sys_log'));
         }
+        if (!empty(($component = $filter->getComponent()))) {
+            $where[] = 'component LIKE "%' . $this->getDatabase()->escapeStrForLike($component, 'sys_log') . '%"';
+        }
+
+        $selectFields = $this->selectFields;
+        $selectFields .= $filter->isCropMessage() ? ',CONCAT(LEFT(message , 120), "...") as message' : ',message';
+        $selectFields .= $filter->isShowData() ? ',data' : ',"- {}"';
 
         $logs = [];
         $statement = $this->getDatabase()->prepare_SELECTquery(
-            $this->selectFields,
+            $selectFields,
             $this->table,
             implode(' AND ', $where)
         );
