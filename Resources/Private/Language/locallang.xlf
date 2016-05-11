@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="logs">
+        <body>
+            <trans-unit id="filter.minimum_severity">
+                <source>Minimum severity</source>
+            </trans-unit>
+            <trans-unit id="filter.request_id">
+                <source>Request ID</source>
+            </trans-unit>
+            <trans-unit id="filter.start_time">
+                <source>Start time</source>
+            </trans-unit>
+            <trans-unit id="filter.end_time">
+                <source>End time</source>
+            </trans-unit>
+            <trans-unit id="search">
+                <source>Search</source>
+            </trans-unit>
+            <trans-unit id="filter">
+                <source>Filter</source>
+            </trans-unit>
+            <trans-unit id="logs">
+                <source>Logs</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -2,6 +2,8 @@
 namespace VerteXVaaR\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
+use VerteXVaaR\Logs\Domain\Model\Filter;
+use VerteXVaaR\Logs\Domain\Model\Log;
 
 /**
  * Class ReaderCollection
@@ -106,13 +108,26 @@ class ConjunctionReader implements ReaderInterface
     }
 
     /**
-     * @return array
+     * @return Log[]
      */
     public function findAll()
     {
         $logs = [];
         foreach ($this->readers as $reader) {
             $logs = array_merge($logs, $reader->findAll());
+        }
+        return $logs;
+    }
+
+    /**
+     * @param Filter $filter
+     * @return Log[]
+     */
+    public function findByFilter(Filter $filter)
+    {
+        $logs = [];
+        foreach ($this->readers as $reader) {
+            $logs = array_merge($logs, $reader->findByFilter($filter));
         }
         return $logs;
     }
