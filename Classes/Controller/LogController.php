@@ -2,8 +2,7 @@
 namespace VerteXVaaR\Logs\Controller;
 
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use VerteXVaaR\Logs\Helper\LoggingTrait;
-use VerteXVaaR\Logs\Log\ConjunctionReaderFactory;
+use VerteXVaaR\Logs\Log\Reader\ConjunctionReader;
 use VerteXVaaR\Logs\Log\Reader\ReaderInterface;
 
 /**
@@ -11,8 +10,6 @@ use VerteXVaaR\Logs\Log\Reader\ReaderInterface;
  */
 class LogController extends ActionController
 {
-    use LoggingTrait;
-
     /**
      * @var ReaderInterface
      */
@@ -23,7 +20,7 @@ class LogController extends ActionController
      */
     public function initializeObject()
     {
-        $this->reader = ConjunctionReaderFactory::fromConfiguration();
+        $this->reader = ConjunctionReader::fromConfiguration();
     }
 
     /**
