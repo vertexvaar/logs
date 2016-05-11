@@ -80,7 +80,10 @@ class DatabaseReader implements ReaderInterface
         $statement = $this->getDatabase()->prepare_SELECTquery(
             $selectFields,
             $this->table,
-            implode(' AND ', $where)
+            implode(' AND ', $where),
+            '',
+            $filter->getOrderField() . ' ' . $filter->getOrderDirection(),
+            $filter->getLimit()
         );
         $statement->setFetchMode(PreparedStatement::FETCH_NUM);
         if ($statement->execute()) {

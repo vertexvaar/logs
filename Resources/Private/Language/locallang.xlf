@@ -8,11 +8,11 @@
             <trans-unit id="filter.request_id">
                 <source>Request ID</source>
             </trans-unit>
-            <trans-unit id="filter.start_time">
-                <source>Start time</source>
+            <trans-unit id="filter.from_time">
+                <source>From time</source>
             </trans-unit>
-            <trans-unit id="filter.end_time">
-                <source>End time</source>
+            <trans-unit id="filter.to_time">
+                <source>To time</source>
             </trans-unit>
             <trans-unit id="filter.show_data">
                 <source>Show data</source>
@@ -23,6 +23,31 @@
             <trans-unit id="filter.crop_message">
                 <source>Crop messages</source>
             </trans-unit>
+            <trans-unit id="filter.limit">
+                <source>Limit</source>
+            </trans-unit>
+            <trans-unit id="filter.order_field">
+                <source>Order field</source>
+            </trans-unit>
+            <trans-unit id="filter.time_micro">
+                <source>Microtime</source>
+            </trans-unit>
+            <trans-unit id="filter.level">
+                <source>Level</source>
+            </trans-unit>
+            <trans-unit id="filter.message">
+                <source>Message</source>
+            </trans-unit>
+            <trans-unit id="filter.order_direction">
+                <source>Order direction</source>
+            </trans-unit>
+            <trans-unit id="filter.desc">
+                <source>Descending</source>
+            </trans-unit>
+            <trans-unit id="filter.asc">
+                <source>Ascending</source>
+            </trans-unit>
+
             <trans-unit id="verbosity">
                 <source>Verbosity</source>
             </trans-unit>

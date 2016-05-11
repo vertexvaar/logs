@@ -15,16 +15,16 @@
 					<f:form.textfield property="requestId" id="tx_logs_filter_request_id" class="form-control form-control-adapt"/>
 				</div>
 				<div class="form-group col-sm-3">
+					<label for="tx_logs_filter_component"><f:translate key="filter.component">component</f:translate></label>
+					<f:form.textfield property="component" id="tx_logs_filter_component" class="form-control form-control-adapt"/>
+				</div>
+				<div class="form-group col-sm-3">
 					<label for="tx_logs_filter_from_time"><f:translate key="filter.from_time">from time</f:translate></label>
 					<f:form.textfield property="fromTime" id="tx_logs_filter_from_time" class="form-control form-control-adapt"/>
 				</div>
 				<div class="form-group col-sm-3">
 					<label for="tx_logs_filter_to_time"><f:translate key="filter.to_time">to time</f:translate></label>
 					<f:form.textfield property="toTime" id="tx_logs_filter_to_time" class="form-control form-control-adapt"/>
-				</div>
-				<div class="form-group col-sm-3">
-					<label for="tx_logs_filter_minimum_severity"><f:translate key="filter.minimum_severity">minimum severity</f:translate></label>
-					<f:form.select property="minimumSeverity" options="{filter.logLevels}" id="tx_logs_filter_minimum_severity" class="form-control form-control-adapt"/>
 				</div>
 			</div>
 		</fieldset>
@@ -46,8 +46,24 @@
 					</div>
 				</div>
 				<div class="form-group col-sm-3">
-					<label for="tx_logs_filter_component"><f:translate key="filter.component">component</f:translate></label>
-					<f:form.textfield property="component" id="tx_logs_filter_component" class="form-control form-control-adapt"/>
+					<label for="tx_logs_filter_minimum_severity"><f:translate key="filter.minimum_severity">minimum severity</f:translate></label>
+					<f:form.select property="minimumSeverity" options="{filter.logLevels}" id="tx_logs_filter_minimum_severity" class="form-control form-control-adapt"/>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-section">
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label for="tx_logs_filter_order_field"><f:translate key="filter.order_field">order field</f:translate></label>
+					<f:form.select property="orderField" options="{filter.orderFields}" id="tx_logs_filter_order_field" class="form-control form-control-adapt"/>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="tx_logs_filter_order_direction"><f:translate key="filter.order_direction">order direction</f:translate></label>
+					<f:form.select property="orderDirection" options="{filter.orderDirections}" id="tx_logs_filter_order_direction" class="form-control form-control-adapt"/>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="tx_logs_filter_limit"><f:translate key="filter.limit">limit</f:translate></label>
+					<f:form.textfield property="limit" id="tx_logs_filter_limit" class="form-control form-control-adapt"/>
 				</div>
 			</div>
 		</fieldset>
@@ -58,15 +74,15 @@
 		</fieldset>
 	</f:form>
 
-	<h1><f:translate key="logs">logs</f:translate></h1>
+	<h1><f:translate key="logs">logs</f:translate> (<f:count>{logs}</f:count>)</h1>
 	<table class="table">
 		<thead>
 			<tr>
-				<th>requestId</th>
-				<th>timeMicro</th>
-				<th>component</th>
-				<th>level</th>
-				<th>message</th>
+				<th><f:translate key="filter.request_id">request id</f:translate></th>
+				<th><f:translate key="filter.time_micro">micro time</f:translate></th>
+				<th><f:translate key="filter.component">component</f:translate></th>
+				<th><f:translate key="filter.level">level</f:translate></th>
+				<th><f:translate key="filter.message">message</f:translate></th>
 				<f:if condition="{filter.showData}"><th>data</th></f:if>
 			</tr>
 		</thead>

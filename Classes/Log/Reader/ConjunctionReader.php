@@ -2,6 +2,8 @@
 namespace VerteXVaaR\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
 
@@ -129,7 +131,18 @@ class ConjunctionReader implements ReaderInterface
         foreach ($this->readers as $reader) {
             $logs = array_merge($logs, $reader->findByFilter($filter));
         }
-        return $logs;
+        $orderField = GeneralUtility::underscoredToUpperCamelCase($filter->getOrderField());
+        $direction = 'ASC' === $filter->getOrderDirection() ? -1 : 1;
+        usort(
+            $logs,
+            function ($left, $right) use ($orderField, $direction) {
+                return $direction * strcmp(
+                    ObjectAccess::getProperty($right, $orderField),
+                    ObjectAccess::getProperty($left, $orderField)
+                );
+            }
+        );
+        return array_slice($logs, 0, $filter->getLimit());
     }
 
     /**

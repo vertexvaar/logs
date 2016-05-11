@@ -2,6 +2,7 @@
 namespace VerteXVaaR\Logs\Domain\Model;
 
 use TYPO3\CMS\Core\Log\LogLevel;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class Filter
@@ -16,7 +17,7 @@ class Filter
     /**
      * @var int
      */
-    protected $minimumSeverity = LogLevel::DEBUG;
+    protected $minimumSeverity = LogLevel::NOTICE;
 
     /**
      * @var int
@@ -41,7 +42,22 @@ class Filter
     /**
      * @var bool
      */
-    protected $cropMessage = false;
+    protected $cropMessage = true;
+
+    /**
+     * @var int
+     */
+    protected $limit = 150;
+
+    /**
+     * @var string
+     */
+    protected $orderField = 'time_micro';
+
+    /**
+     * @var string
+     */
+    protected $orderDirection = 'DESC';
 
     /**
      * @return string
@@ -156,6 +172,54 @@ class Filter
     }
 
     /**
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * @param int $limit
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderField()
+    {
+        return $this->orderField;
+    }
+
+    /**
+     * @param string $orderField
+     */
+    public function setOrderField($orderField)
+    {
+        $this->orderField = $orderField;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderDirection()
+    {
+        return $this->orderDirection;
+    }
+
+    /**
+     * @param string $orderDirection
+     */
+    public function setOrderDirection($orderDirection)
+    {
+        $this->orderDirection = $orderDirection;
+    }
+
+    /**
      * @return array
      */
     public function getLogLevels()
@@ -170,5 +234,26 @@ class Filter
             LogLevel::INFO => LogLevel::INFO . ' (' . \Psr\Log\LogLevel::INFO . ')',
             LogLevel::DEBUG => LogLevel::DEBUG . ' (' . \Psr\Log\LogLevel::DEBUG . ')',
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrderFields()
+    {
+        return [
+            'time_micro' => LocalizationUtility::translate('filter.time_micro', 'logs'),
+            'request_id' => LocalizationUtility::translate('filter.request_id', 'logs'),
+            'component' => LocalizationUtility::translate('filter.component', 'logs'),
+        ];
+    }
+
+    public function getOrderDirections()
+    {
+       return [
+           'DESC' => LocalizationUtility::translate('filter.desc', 'logs'),
+           'ASC' => LocalizationUtility::translate('filter.asc', 'logs'),
+       ];
+
     }
 }
