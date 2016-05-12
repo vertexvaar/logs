@@ -42,7 +42,7 @@ class Filter
     /**
      * @var bool
      */
-    protected $cropMessage = true;
+    protected $cropMessage = false;
 
     /**
      * @var int
