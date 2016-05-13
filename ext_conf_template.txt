@@ -1,0 +1,5 @@
+# cat=basic; type=boolean; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:modules
+modules = 1
+
+# cat=basic; type=options[Tools=tools,System=system]; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:category
+category = tools
