@@ -132,7 +132,7 @@ class ConjunctionReader implements ReaderInterface
             $logs = array_merge($logs, $reader->findByFilter($filter));
         }
         $orderField = GeneralUtility::underscoredToUpperCamelCase($filter->getOrderField());
-        $direction = 'ASC' === $filter->getOrderDirection() ? -1 : 1;
+        $direction = Filter::SORTING_ASC === $filter->getOrderDirection() ? -1 : 1;
         usort(
             $logs,
             function ($left, $right) use ($orderField, $direction) {
