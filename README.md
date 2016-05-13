@@ -44,6 +44,11 @@ which read from the specific location where the writer writes the log
 entries. Therefore it's possible to read and filter logs accross all log
 destinations (tables, files, etc.)
 
+## TODO
+
+* Register as devlog
+* Also read from sys_log (maybe some adapter thingy?)
+
 ## Found a bug? Feedback?
 
 Please report any bug or negative side effects, as well as your feedback
