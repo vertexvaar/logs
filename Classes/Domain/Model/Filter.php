@@ -49,7 +49,7 @@ class Filter
     /**
      * @var bool
      */
-    protected $cropMessage = false;
+    protected $fullMessage = true;
 
     /**
      * @var int
@@ -165,17 +165,17 @@ class Filter
     /**
      * @return boolean
      */
-    public function isCropMessage()
+    public function isFullMessage()
     {
-        return $this->cropMessage;
+        return $this->fullMessage;
     }
 
     /**
-     * @param boolean $cropMessage
+     * @param boolean $fullMessage
      */
-    public function setCropMessage($cropMessage)
+    public function setFullMessage($fullMessage)
     {
-        $this->cropMessage = $cropMessage;
+        $this->fullMessage = $fullMessage;
     }
 
     /**

@@ -17,8 +17,8 @@
             <trans-unit id="filter.component">
                 <source>Component</source>
             </trans-unit>
-            <trans-unit id="filter.crop_message">
-                <source>Crop messages</source>
+            <trans-unit id="filter.full_message">
+                <source>Show full messages</source>
             </trans-unit>
             <trans-unit id="filter.limit">
                 <source>Limit</source>

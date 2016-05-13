@@ -12,14 +12,14 @@ use VerteXVaaR\Logs\Domain\Model\Log;
 class DatabaseReader implements ReaderInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $table = '';
+    protected $selectFields = ['request_id', 'time_micro', 'component', 'level', 'message', 'data'];
 
     /**
      * @var string
      */
-    protected $selectFields = 'request_id,time_micro,component,level';
+    protected $table = '';
 
     /**
      * DatabaseReader constructor.
@@ -36,16 +36,8 @@ class DatabaseReader implements ReaderInterface
      */
     public function findAll()
     {
-        $logs = [];
         $statement = $this->getDatabase()->prepare_SELECTquery($this->selectFields, $this->table, '1');
-        $statement->setFetchMode(PreparedStatement::FETCH_NUM);
-        if ($statement->execute()) {
-            while (($row = $statement->fetch())) {
-                $row[5] = json_decode(substr($row[5], 2), true);
-                $logs[] = new Log(...$row);
-            }
-        }
-        return $logs;
+        return $this->fetchLogsByStatement($statement);
     }
 
     /**
@@ -54,45 +46,86 @@ class DatabaseReader implements ReaderInterface
      */
     public function findByFilter(Filter $filter)
     {
+        $statement = $this->getDatabase()->prepare_SELECTquery(
+            $this->getSelectFieldsByFilter($filter),
+            $this->table,
+            $this->getWhereClausByFilter($filter),
+            '',
+            $filter->getOrderField() . ' ' . $filter->getOrderDirection(),
+            $filter->getLimit()
+        );
+        return $this->fetchLogsByStatement($statement);
+    }
+
+    /**
+     * @param Filter $filter
+     * @return string
+     */
+    protected function getWhereClausByFilter(Filter $filter)
+    {
         $where = [
             'level<=' . $filter->getLevel(),
             'message IS NOT NULL',
         ];
         if (!empty(($requestId = $filter->getRequestId()))) {
-            $where[] = sprintf('request_id LIKE "%s"', $this->getDatabase()->escapeStrForLike($requestId, 'sys_log'));
+            /* @see \TYPO3\CMS\Core\Core\Bootstrap::__construct for requestId string length */
+            if (13 === strlen($requestId)) {
+                $where[] = Filter::ORDER_REQUEST_ID . ' = "' . $this->escapeString($requestId) . '"';
+            } else {
+                $where[] = Filter::ORDER_REQUEST_ID . ' LIKE "%' . $this->escapeString($requestId) . '%"';
+            }
         }
         if (!empty(($fromTime = $filter->getFromTime()))) {
-            $where[] = sprintf('time_micro >= %d', $this->getDatabase()->escapeStrForLike($fromTime, 'sys_log'));
+            $where[] = Filter::ORDER_TIME_MICRO . ' >= ' . $this->escapeString($fromTime);
         }
         if (!empty(($toTime = $filter->getToTime()))) {
-            // Add +1 to the timestamp to ignore microseconds when comparing. UX stuff, you know ;)
-            $where[] = sprintf('time_micro <= %d', $this->getDatabase()->escapeStrForLike($toTime + 1, 'sys_log'));
+            // Add +1 to the timestamp to ignore additional microseconds when comparing. UX stuff, you know ;)
+            $where[] = Filter::ORDER_TIME_MICRO . ' <= ' . $this->escapeString($toTime + 1);
         }
         if (!empty(($component = $filter->getComponent()))) {
-            $where[] = 'component LIKE "%' . $this->getDatabase()->escapeStrForLike($component, 'sys_log') . '%"';
+            $where[] = Filter::ORDER_COMPONENT . ' = "%' . $this->escapeString($component) . '%"';
         }
+        return implode(' AND ', $where);
+    }
 
+    /**
+     * @param Filter $filter
+     * @return string
+     */
+    protected function getSelectFieldsByFilter(Filter $filter)
+    {
         $selectFields = $this->selectFields;
-        $selectFields .= $filter->isCropMessage() ? ',CONCAT(LEFT(message , 120), "...") as message' : ',message';
-        $selectFields .= $filter->isShowData() ? ',data' : ',"- {}"';
+        $filter->isFullMessage() ?: $selectFields[4] = 'CONCAT(LEFT(message , 120), "...") as message';
+        $filter->isShowData() ?: $selectFields[5] = '"- {}"';
+        return implode(',', $selectFields);
+    }
 
+    /**
+     * @param PreparedStatement $statement
+     * @return Log[]
+     */
+    protected function fetchLogsByStatement(PreparedStatement $statement)
+    {
         $logs = [];
-        $statement = $this->getDatabase()->prepare_SELECTquery(
-            $selectFields,
-            $this->table,
-            implode(' AND ', $where),
-            '',
-            $filter->getOrderField() . ' ' . $filter->getOrderDirection(),
-            $filter->getLimit()
-        );
         $statement->setFetchMode(PreparedStatement::FETCH_NUM);
+
         if ($statement->execute()) {
             while (($row = $statement->fetch())) {
                 $row[5] = json_decode(substr($row[5], 2), true);
                 $logs[] = new Log(...$row);
             }
+            return $logs;
         }
         return $logs;
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    protected function escapeString($string)
+    {
+        return $this->getDatabase()->escapeStrForLike($string, 'sys_log');
     }
 
     /**
