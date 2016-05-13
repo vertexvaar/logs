@@ -9,6 +9,13 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class Filter
 {
+    const SORTING_DESC = 'DESC';
+    const SORTING_ASC = 'ASC';
+    const ORDER_TIME_MICRO = 'time_micro';
+    const ORDER_REQUEST_ID = 'request_id';
+    const ORDER_COMPONENT = 'component';
+    const ORDER_LEVEL = 'level';
+
     /**
      * @var string
      */
@@ -52,12 +59,12 @@ class Filter
     /**
      * @var string
      */
-    protected $orderField = 'time_micro';
+    protected $orderField = self::ORDER_TIME_MICRO;
 
     /**
      * @var string
      */
-    protected $orderDirection = 'DESC';
+    protected $orderDirection = self::SORTING_DESC;
 
     /**
      * @return string
@@ -242,19 +249,21 @@ class Filter
     public function getOrderFields()
     {
         return [
-            'time_micro' => LocalizationUtility::translate('filter.time_micro', 'logs'),
-            'request_id' => LocalizationUtility::translate('filter.request_id', 'logs'),
-            'component' => LocalizationUtility::translate('filter.component', 'logs'),
-            'level' => LocalizationUtility::translate('filter.level', 'logs'),
+            self::ORDER_TIME_MICRO => LocalizationUtility::translate('filter.time_micro', 'logs'),
+            self::ORDER_REQUEST_ID => LocalizationUtility::translate('filter.request_id', 'logs'),
+            self::ORDER_COMPONENT => LocalizationUtility::translate('filter.component', 'logs'),
+            self::ORDER_LEVEL => LocalizationUtility::translate('filter.level', 'logs'),
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getOrderDirections()
     {
-       return [
-           'DESC' => LocalizationUtility::translate('filter.desc', 'logs'),
-           'ASC' => LocalizationUtility::translate('filter.asc', 'logs'),
-       ];
-
+        return [
+            self::SORTING_DESC => LocalizationUtility::translate('filter.desc', 'logs'),
+            self::SORTING_ASC => LocalizationUtility::translate('filter.asc', 'logs'),
+        ];
     }
 }
