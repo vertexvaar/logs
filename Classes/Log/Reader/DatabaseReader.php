@@ -112,6 +112,9 @@ class DatabaseReader implements ReaderInterface
         if ($statement->execute()) {
             while (($row = $statement->fetch())) {
                 $row[5] = json_decode(substr($row[5], 2), true);
+                if (empty($row[5])) {
+                    $row[5] = [];
+                }
                 $logs[] = new Log(...$row);
             }
             return $logs;
