@@ -149,7 +149,7 @@ class ConjunctionReader implements ReaderInterface
      * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected function getLogConfiguration()
+    protected static function getLogConfiguration()
     {
         return $GLOBALS['TYPO3_CONF_VARS']['LOG'];
     }
