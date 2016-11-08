@@ -17,17 +17,19 @@ CLI walkthrough:
 
 ```
 composer require vertexvaar/logs
-./typo3/cli_dispatch.phpsh extbase extension:install typo3booster
 ```
 
-Other way:
+Activate cia CLI or Extension Manager.
 
-C'mon...
-Please stick to composer. But you can still activate the extensions via
-the TYPO3 extension manager.
+Other way (EM):
 
-If you don't want to do cool stuff with composer you can download this
-extension as ZIP. Quick links for downloads:
+You should really use composer, just sayin'. But you can still install the extensions via the TYPO3 extension manager.
+Don't forget to activate it afterwards.
+
+Last way (DL):
+
+If you don't want to do cool stuff with composer you can download this extension as ZIP.
+Quick links for downloads:
 
 * [Branch: master](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/master.zip)
 * [Tag: 1.0.0](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/1.0.0.zip)
