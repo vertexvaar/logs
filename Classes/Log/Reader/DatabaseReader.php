@@ -36,15 +36,6 @@ class DatabaseReader implements ReaderInterface
     }
 
     /**
-     * @return Log[]
-     */
-    public function findAll()
-    {
-        $statement = $this->getDatabase()->prepare_SELECTquery($this->selectFields, $this->table, '1');
-        return $this->fetchLogsByStatement($statement);
-    }
-
-    /**
      * @param Filter $filter
      * @return Log[]
      */

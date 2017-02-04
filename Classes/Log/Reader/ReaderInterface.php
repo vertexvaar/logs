@@ -17,11 +17,6 @@ interface ReaderInterface
     public function __construct(array $configuration = []);
 
     /**
-     * @return Log[]
-     */
-    public function findAll();
-
-    /**
      * @param Filter $filter
      * @return Log[]
      */

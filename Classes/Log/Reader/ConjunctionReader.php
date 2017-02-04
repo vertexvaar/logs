@@ -35,18 +35,6 @@ class ConjunctionReader implements ReaderInterface
     }
 
     /**
-     * @return Log[]
-     */
-    public function findAll()
-    {
-        $logs = [];
-        foreach ($this->readers as $reader) {
-            $logs = array_merge($logs, $reader->findAll());
-        }
-        return $logs;
-    }
-
-    /**
      * @param Filter $filter
      * @return Log[]
      */
