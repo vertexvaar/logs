@@ -1,21 +1,21 @@
 {
-  "name": "vertexvaar/logs",
-  "type": "typo3-cms-extension",
-  "description": "TYPO3 Logging API reading module and devlog extension in one",
-  "license": "GPL-2.0+",
-  "autoload": {
-    "psr-4": {
-      "VerteXVaaR\\Logs\\": "Classes/"
+    "name": "vertexvaar/logs",
+    "type": "typo3-cms-extension",
+    "description": "TYPO3 Logging API reading module and devlog extension in one",
+    "license": "GPL-2.0+",
+    "autoload": {
+        "psr-4": {
+            "VerteXVaaR\\Logs\\": "Classes/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "typo3/cms": "^7.6",
+        "psr/log": "^1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
-  },
-  "require": {
-    "php": ">=5.5.0",
-    "typo3/cms": "^7.6",
-    "psr/log": "^1.0"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0.x-dev"
-    }
-  }
 }

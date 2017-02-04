@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" product-name="logs">
-        <body>
-            <trans-unit id="filter.request_id">
-                <source>Request ID</source>
-            </trans-unit>
-            <trans-unit id="filter.from_time">
-                <source>From time</source>
-            </trans-unit>
-            <trans-unit id="filter.to_time">
-                <source>To time</source>
-            </trans-unit>
-            <trans-unit id="filter.show_data">
-                <source>Show data</source>
-            </trans-unit>
-            <trans-unit id="filter.component">
-                <source>Component</source>
-            </trans-unit>
-            <trans-unit id="filter.full_message">
-                <source>Show full messages</source>
-            </trans-unit>
-            <trans-unit id="filter.limit">
-                <source>Limit</source>
-            </trans-unit>
-            <trans-unit id="filter.order_field">
-                <source>Order field</source>
-            </trans-unit>
-            <trans-unit id="filter.time_micro">
-                <source>Microtime</source>
-            </trans-unit>
-            <trans-unit id="filter.level">
-                <source>Level</source>
-            </trans-unit>
-            <trans-unit id="filter.message">
-                <source>Message</source>
-            </trans-unit>
-            <trans-unit id="filter.order_direction">
-                <source>Order direction</source>
-            </trans-unit>
-            <trans-unit id="filter.desc">
-                <source>Descending</source>
-            </trans-unit>
-            <trans-unit id="filter.asc">
-                <source>Ascending</source>
-            </trans-unit>
+	<file source-language="en" datatype="plaintext" original="messages" product-name="logs">
+		<body>
+			<trans-unit id="filter.request_id">
+				<source>Request ID</source>
+			</trans-unit>
+			<trans-unit id="filter.from_time">
+				<source>From time</source>
+			</trans-unit>
+			<trans-unit id="filter.to_time">
+				<source>To time</source>
+			</trans-unit>
+			<trans-unit id="filter.show_data">
+				<source>Show data</source>
+			</trans-unit>
+			<trans-unit id="filter.component">
+				<source>Component</source>
+			</trans-unit>
+			<trans-unit id="filter.full_message">
+				<source>Show full messages</source>
+			</trans-unit>
+			<trans-unit id="filter.limit">
+				<source>Limit</source>
+			</trans-unit>
+			<trans-unit id="filter.order_field">
+				<source>Order field</source>
+			</trans-unit>
+			<trans-unit id="filter.time_micro">
+				<source>Microtime</source>
+			</trans-unit>
+			<trans-unit id="filter.level">
+				<source>Level</source>
+			</trans-unit>
+			<trans-unit id="filter.message">
+				<source>Message</source>
+			</trans-unit>
+			<trans-unit id="filter.order_direction">
+				<source>Order direction</source>
+			</trans-unit>
+			<trans-unit id="filter.desc">
+				<source>Descending</source>
+			</trans-unit>
+			<trans-unit id="filter.asc">
+				<source>Ascending</source>
+			</trans-unit>
 
-            <trans-unit id="verbosity">
-                <source>Verbosity</source>
-            </trans-unit>
-            <trans-unit id="search">
-                <source>Search</source>
-            </trans-unit>
-            <trans-unit id="filter">
-                <source>Filter</source>
-            </trans-unit>
-            <trans-unit id="logs">
-                <source>Logs</source>
-            </trans-unit>
-        </body>
-    </file>
+			<trans-unit id="verbosity">
+				<source>Verbosity</source>
+			</trans-unit>
+			<trans-unit id="search">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="filter">
+				<source>Filter</source>
+			</trans-unit>
+			<trans-unit id="logs">
+				<source>Logs</source>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>

@@ -74,26 +74,36 @@
 		</fieldset>
 	</f:form>
 
-	<h1><f:translate key="logs">logs</f:translate> (<f:count>{logs}</f:count>)</h1>
+	<h1><f:translate key="logs">logs</f:translate> (
+		<f:count>{logs}</f:count>
+		)
+	</h1>
 	<table class="table">
 		<thead>
-			<tr>
-				<th><f:translate key="filter.request_id">request id</f:translate></th>
-				<th><f:translate key="filter.time_micro">micro time</f:translate></th>
-				<th><f:translate key="filter.component">component</f:translate></th>
-				<th><f:translate key="filter.level">level</f:translate></th>
-				<th><f:translate key="filter.message">message</f:translate></th>
-				<f:if condition="{filter.showData}"><th>data</th></f:if>
-			</tr>
+		<tr>
+			<th><f:translate key="filter.request_id">request id</f:translate></th>
+			<th><f:translate key="filter.time_micro">micro time</f:translate></th>
+			<th><f:translate key="filter.component">component</f:translate></th>
+			<th><f:translate key="filter.level">level</f:translate></th>
+			<th><f:translate key="filter.message">message</f:translate></th>
+			<f:if condition="{filter.showData}">
+				<th>data</th>
+			</f:if>
+		</tr>
 		</thead>
 		<f:for each="{logs}" as="log">
 			<tr>
 				<td>{log.requestId}</td>
-				<td><logs:format.microtime microTime="{log.timeMicro}"/><br/>({log.timeMicro})</td>
+				<td>
+					<logs:format.microtime microTime="{log.timeMicro}"/>
+					<br/>({log.timeMicro})
+				</td>
 				<td>{log.component}</td>
 				<td>{log.level}</td>
 				<td>{log.message}</td>
-				<f:if condition="{filter.showData}"><td>{log.data -> f:debug(inline:'true')}</td></f:if>
+				<f:if condition="{filter.showData}">
+					<td>{log.data -> f:debug(inline:'true')}</td>
+				</f:if>
 			</tr>
 		</f:for>
 	</table>
