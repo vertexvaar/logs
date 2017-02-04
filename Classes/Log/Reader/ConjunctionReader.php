@@ -25,7 +25,7 @@ class ConjunctionReader implements ReaderInterface
     public static function fromConfiguration()
     {
         $conjunctionReader = new static();
-        $conjunctionReader->setReaders(self::getReadersForWriters());
+        $conjunctionReader->setReaders(static::getReadersForWriters());
         return $conjunctionReader;
     }
 
@@ -36,20 +36,20 @@ class ConjunctionReader implements ReaderInterface
     protected static function getReadersForWriters(array $logConfiguration = null)
     {
         if (null === $logConfiguration) {
-            $logConfiguration = self::getLogConfiguration();
+            $logConfiguration = static::getLogConfiguration();
         }
 
         $logReader = [];
         foreach ($logConfiguration as $key => $value) {
             if (is_array($value)) {
                 if ('writerConfiguration' !== $key) {
-                    $logReader = array_merge($logReader, self::getReadersForWriters($value));
+                    $logReader = array_merge($logReader, static::getReadersForWriters($value));
                 } else {
                     foreach ($value as $writer) {
                         if (is_array($writer)) {
                             foreach ($writer as $class => $writerConfiguration) {
-                                if (isset(self::$writerReaderMapping[$class])) {
-                                    $readerClass = self::$writerReaderMapping[$class];
+                                if (isset(static::$writerReaderMapping[$class])) {
+                                    $readerClass = static::$writerReaderMapping[$class];
                                     $logReader[] = new $readerClass($writerConfiguration);
                                 }
                             }

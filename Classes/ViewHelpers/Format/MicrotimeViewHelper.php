@@ -18,7 +18,7 @@ class MicrotimeViewHelper extends AbstractViewHelper implements CompilableInterf
      */
     public function render($microTime, $format = 'Y-m-d H:i:s.u')
     {
-        return self::renderStatic(
+        return static::renderStatic(
             [
                 'microTime' => $microTime,
                 'format' => $format,

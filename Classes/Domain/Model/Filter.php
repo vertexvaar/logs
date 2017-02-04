@@ -249,10 +249,10 @@ class Filter
     public function getOrderFields()
     {
         return [
-            self::ORDER_TIME_MICRO => LocalizationUtility::translate('filter.time_micro', 'logs'),
-            self::ORDER_REQUEST_ID => LocalizationUtility::translate('filter.request_id', 'logs'),
-            self::ORDER_COMPONENT => LocalizationUtility::translate('filter.component', 'logs'),
-            self::ORDER_LEVEL => LocalizationUtility::translate('filter.level', 'logs'),
+            static::ORDER_TIME_MICRO => LocalizationUtility::translate('filter.time_micro', 'logs'),
+            static::ORDER_REQUEST_ID => LocalizationUtility::translate('filter.request_id', 'logs'),
+            static::ORDER_COMPONENT => LocalizationUtility::translate('filter.component', 'logs'),
+            static::ORDER_LEVEL => LocalizationUtility::translate('filter.level', 'logs'),
         ];
     }
 
@@ -262,8 +262,8 @@ class Filter
     public function getOrderDirections()
     {
         return [
-            self::SORTING_DESC => LocalizationUtility::translate('filter.desc', 'logs'),
-            self::SORTING_ASC => LocalizationUtility::translate('filter.asc', 'logs'),
+            static::SORTING_DESC => LocalizationUtility::translate('filter.desc', 'logs'),
+            static::SORTING_ASC => LocalizationUtility::translate('filter.asc', 'logs'),
         ];
     }
 }
