@@ -19,7 +19,7 @@ call_user_func(
                 ['Log' => 'filter'],
                 [
                     'access' => 'user,group',
-                    'icon' => '',
+                    'icon' => 'EXT:logs/Resources/Public/Icons/Extension.svg',
                     'labels' => 'LLL:EXT:logs/Resources/Private/Language/locallang.module.xlf',
                 ]
             );
