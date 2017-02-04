@@ -28,7 +28,11 @@ class DatabaseReader implements ReaderInterface
      */
     public function __construct(array $configuration = [])
     {
-        $this->table = $configuration['logTable'];
+        if (isset($configuration['logTable'])) {
+            $this->table = $configuration['logTable'];
+        } else {
+            $this->table = 'sys_log';
+        }
     }
 
     /**
