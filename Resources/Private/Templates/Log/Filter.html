@@ -1,4 +1,5 @@
 {namespace logs=VerteXVaaR\Logs\ViewHelpers}
+{namespace core=TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Backend"/>
 
 <f:section name="LeftToolBar"></f:section>
@@ -74,10 +75,7 @@
 		</fieldset>
 	</f:form>
 
-	<h1><f:translate key="logs">logs</f:translate> (
-		<f:count>{logs}</f:count>
-		)
-	</h1>
+	<h1><f:translate key="logs">logs</f:translate> ({logs -> f:count()})</h1>
 	<table class="table">
 		<thead>
 		<tr>
@@ -89,6 +87,7 @@
 			<f:if condition="{filter.showData}">
 				<th>data</th>
 			</f:if>
+			<th><f:translate key="actions">actions</f:translate></th>
 		</tr>
 		</thead>
 		<f:for each="{logs}" as="log">
@@ -104,6 +103,7 @@
 				<f:if condition="{filter.showData}">
 					<td>{log.data -> f:debug(inline:'true')}</td>
 				</f:if>
+				<td><f:link.action action="delete" arguments="{requestId:log.requestId,timeMicro:log.timeMicro,component:log.component,level:log.level,message:log.message}" class="btn btn-default"><core:icon identifier="actions-delete"/></f:link.action></td>
 			</tr>
 		</f:for>
 	</table>

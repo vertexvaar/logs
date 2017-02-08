@@ -13,7 +13,7 @@ call_user_func(
                 $configuration['moduleConfig'],
                 'tx_logs_m1',
                 '',
-                ['Log' => 'filter'],
+                ['Log' => 'filter,delete'],
                 [
                     'access' => 'user,group',
                     'icon' => 'EXT:logs/Resources/Public/Icons/Extension.svg',

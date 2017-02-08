@@ -31,6 +31,7 @@ class ConjunctionReader implements ReaderInterface
      */
     public function __construct(array $configuration = [])
     {
+        $this->readers = $this->getReadersForWriters();
     }
 
     /**
@@ -56,16 +57,6 @@ class ConjunctionReader implements ReaderInterface
             }
         );
         return array_slice($logs, 0, $filter->getLimit());
-    }
-
-    /**
-     * @constructor Factory method to create an instance will all supported log reader
-     */
-    public static function fromConfiguration()
-    {
-        $conjunctionReader = new static();
-        $conjunctionReader->setReaders(static::getReadersForWriters());
-        return $conjunctionReader;
     }
 
     /**
@@ -106,17 +97,17 @@ class ConjunctionReader implements ReaderInterface
      * @param array|null $logConfiguration
      * @return array
      */
-    protected static function getReadersForWriters(array $logConfiguration = null)
+    protected function getReadersForWriters(array $logConfiguration = null)
     {
         if (null === $logConfiguration) {
-            $logConfiguration = static::getLogConfiguration();
+            $logConfiguration = $this->getLogConfiguration();
         }
 
         $logReader = [];
         foreach ($logConfiguration as $key => $value) {
             if (is_array($value)) {
                 if ('writerConfiguration' !== $key) {
-                    $logReader = array_merge($logReader, static::getReadersForWriters($value));
+                    $logReader = array_merge($logReader, $this->getReadersForWriters($value));
                 } else {
                     foreach ($value as $writer) {
                         if (is_array($writer)) {
@@ -138,7 +129,7 @@ class ConjunctionReader implements ReaderInterface
      * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected static function getLogConfiguration()
+    protected function getLogConfiguration()
     {
         return $GLOBALS['TYPO3_CONF_VARS']['LOG'];
     }
