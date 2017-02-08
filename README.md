@@ -32,7 +32,7 @@ If you don't want to do cool stuff with composer you can download this extension
 Quick links for downloads:
 
 * [Branch: master](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/master.zip)
-* [Tag: 1.0.0](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/1.0.0.zip)
+* [Tag: 1.1.0](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/1.1.0.zip)
 
 ## In depth
 
@@ -46,15 +46,24 @@ which read from the specific location where the writer writes the log
 entries. Therefore it's possible to read and filter logs accross all log
 destinations (tables, files, etc.)
 
+## TYPO3 & PHP compatibility
+
+PHP 5.3 reached its end of life and TYPO3 6.2 will end in 31 March 2017. There is no point in supporting those two anymore.
+PHP 5.4 and 5.5 are no longer supported by the PHP group, but they are still widely used.
+I want encourage you to upgrade to at least PHP 5.6, but if you are tied to it then you can still go with the v1 branch of logs.
+The v2 branch will require at least PHP 7.0 but still support TYPO3 7.6. (Maybe not every tiniest feature, but it will still do everything it's supposed to)
+
 ## TODO
 
 * Register as devlog
-* Also read from sys_log (maybe some adapter thingy?)
+* ~~Also read from sys_log (maybe some adapter thingy?)~~
+* Ensure log sources are processed only once
+* Identify and fix that one bug that sometimes won't delete a log entry
+* Save the current filter in the user data so it still applies after reopening the module or deletion of an entry
 
 ## Found a bug? Feedback?
 
-Please report any bug or negative side effects, as well as your feedback
- here [Issues](https://github.com/vertexvaar/VerteXVaaR.Logs/issues)
+Please report any bug or negative side effects, as well as your feedback here: [Issues](https://github.com/vertexvaar/VerteXVaaR.Logs/issues)
 
 ## Other stuff
 
