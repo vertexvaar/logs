@@ -62,7 +62,8 @@ class DatabaseReader implements ReaderInterface
             'level<=' . $filter->getLevel(),
             'message IS NOT NULL',
         ];
-        if (!empty(($requestId = $filter->getRequestId()))) {
+        $requestId = $filter->getRequestId();
+        if (!empty($requestId)) {
             /* @see \TYPO3\CMS\Core\Core\Bootstrap::__construct for requestId string length */
             if (13 === strlen($requestId)) {
                 $where[] = Filter::ORDER_REQUEST_ID . ' = "' . $this->escapeString($requestId) . '"';
@@ -70,14 +71,17 @@ class DatabaseReader implements ReaderInterface
                 $where[] = Filter::ORDER_REQUEST_ID . ' LIKE "%' . $this->escapeString($requestId) . '%"';
             }
         }
-        if (!empty(($fromTime = $filter->getFromTime()))) {
+        $fromTime = $filter->getFromTime();
+        if (!empty($fromTime)) {
             $where[] = Filter::ORDER_TIME_MICRO . ' >= ' . $this->escapeString($fromTime);
         }
-        if (!empty(($toTime = $filter->getToTime()))) {
+        $toTime = $filter->getToTime();
+        if (!empty($toTime)) {
             // Add +1 to the timestamp to ignore additional microseconds when comparing. UX stuff, you know ;)
             $where[] = Filter::ORDER_TIME_MICRO . ' <= ' . $this->escapeString($toTime + 1);
         }
-        if (!empty(($component = $filter->getComponent()))) {
+        $component = $filter->getComponent();
+        if (!empty($component)) {
             $where[] = Filter::ORDER_COMPONENT . ' = "%' . $this->escapeString($component) . '%"';
         }
         return implode(' AND ', $where);
@@ -110,7 +114,7 @@ class DatabaseReader implements ReaderInterface
                 if (empty($row[5])) {
                     $row[5] = [];
                 }
-                $logs[] = new Log(...$row);
+                $logs[] = new Log($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
             }
             return $logs;
         }
