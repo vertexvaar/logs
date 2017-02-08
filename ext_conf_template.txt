@@ -1,5 +1,2 @@
-# cat=basic; type=boolean; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:modules
-modules = 1
-
-# cat=basic; type=options[Tools=tools,System=system]; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:category
-category = tools
+# cat=basic; type=options[LLL:EXT:lang/locallang_mod_admintools.xlf:mlang_tabs_tab=tools,LLL:EXT:lang/locallang_mod_system.xlf:mlang_tabs_tab=system,LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_config.disable=disable]; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_config
+moduleConfig = tools

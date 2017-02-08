@@ -1,19 +1,16 @@
 <?php
 call_user_func(
     function () {
-        if (empty($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['logs'])) {
-            $configuration = [
-                'modules' => '1',
-                'category' => 'tools',
-            ];
-        } else {
-            $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['logs']);
+        $configuration = (array)@unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['logs']);
+
+        if (empty($configuration['moduleConfig'])) {
+            $configuration['moduleConfig'] = 'tools';
         }
 
-        if ('1' === $configuration['modules']) {
+        if ($configuration['moduleConfig'] !== 'disable') {
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
                 'VerteXVaaR.Logs',
-                $configuration['category'],
+                $configuration['moduleConfig'],
                 'tx_logs_m1',
                 '',
                 ['Log' => 'filter'],
