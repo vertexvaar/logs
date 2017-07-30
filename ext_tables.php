@@ -11,7 +11,7 @@ call_user_func(
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
                 'VerteXVaaR.Logs',
                 $configuration['moduleConfig'],
-                'tx_logs_m1',
+                'logs',
                 '',
                 ['Log' => 'filter,delete'],
                 [
