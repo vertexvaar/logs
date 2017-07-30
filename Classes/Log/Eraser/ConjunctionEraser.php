@@ -23,7 +23,7 @@ class ConjunctionEraser implements EraserInterface
     public function __construct(array $configuration = null)
     {
         $eraserFactory = GeneralUtility::makeInstance(EraserFactory::class);
-        $this->eraser = $eraserFactory->getErasersForWriters();
+        $this->eraser = $eraserFactory->getErasersForWriters($configuration);
     }
 
     /**
