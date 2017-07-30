@@ -24,12 +24,8 @@ class LogController extends ActionController
             $filter = GeneralUtility::makeInstance(Filter::class);
         }
 
-        $this->view->assignMultiple(
-            [
-                'filter' => $filter,
-                'logs' => GeneralUtility::makeInstance(ConjunctionReader::class)->findByFilter($filter),
-            ]
-        );
+        $this->view->assign('filter', $filter);
+        $this->view->assign('logs', GeneralUtility::makeInstance(ConjunctionReader::class)->findByFilter($filter));
     }
 
     /**
