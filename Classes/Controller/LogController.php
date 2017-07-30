@@ -1,6 +1,8 @@
 <?php
 namespace VerteXVaaR\Logs\Controller;
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
@@ -17,9 +19,17 @@ class LogController extends ActionController
      */
     public function filterAction(Filter $filter = null)
     {
+        if (null !== $filter) {
+            $this->getBackendUser()->setAndSaveSessionData('tx_logs_filter', $filter);
+        } else {
+            $filter = $this->getBackendUser()->getSessionData('tx_logs_filter');
+            if (null === $filter) {
+                $filter = GeneralUtility::makeInstance(Filter::class);
+            }
+        }
         $this->view->assignMultiple(
             [
-                'filter' => (null !== $filter ? $filter : $filter = new Filter()),
+                'filter' => $filter,
                 'logs' => (new ConjunctionReader())->findByFilter($filter),
             ]
         );
@@ -36,5 +46,15 @@ class LogController extends ActionController
     {
         (new ConjunctionEraser())->delete(new Log($requestId, $timeMicro, $component, $level, $message, []));
         $this->redirect('filter');
+    }
+
+    /**
+     * @return BackendUserAuthentication
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    protected function getBackendUser()
+    {
+        return $GLOBALS['BE_USER'];
     }
 }
