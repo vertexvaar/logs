@@ -30,7 +30,7 @@ class LogController extends ActionController
         $this->view->assignMultiple(
             [
                 'filter' => $filter,
-                'logs' => (new ConjunctionReader())->findByFilter($filter),
+                'logs' => GeneralUtility::makeInstance(ConjunctionReader::class)->findByFilter($filter),
             ]
         );
     }
@@ -44,7 +44,9 @@ class LogController extends ActionController
      */
     public function deleteAction($requestId, $timeMicro, $component, $level, $message)
     {
-        (new ConjunctionEraser())->delete(new Log($requestId, $timeMicro, $component, $level, $message, []));
+        $log = GeneralUtility::makeInstance(Log::class, $requestId, $timeMicro, $component, $level, $message, []);
+        $conjunctionReader = GeneralUtility::makeInstance(ConjunctionEraser::class);
+        $conjunctionReader->delete($log);
         $this->redirect('filter');
     }
 

@@ -3,6 +3,7 @@ namespace VerteXVaaR\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Database\PreparedStatement;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
 
@@ -114,7 +115,15 @@ class DatabaseReader implements ReaderInterface
                 if (empty($row[5])) {
                     $row[5] = [];
                 }
-                $logs[] = new Log($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+                $logs[] = GeneralUtility::makeInstance(
+                    Log::class,
+                    $row[0],
+                    $row[1],
+                    $row[2],
+                    $row[3],
+                    $row[4],
+                    $row[5]
+                );
             }
             return $logs;
         }
