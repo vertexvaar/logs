@@ -23,4 +23,3 @@ call_user_func(
         }
     }
 );
-
