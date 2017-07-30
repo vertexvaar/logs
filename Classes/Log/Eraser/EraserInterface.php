@@ -13,7 +13,7 @@ interface EraserInterface
      *
      * @param array $configuration
      */
-    public function __construct(array $configuration = []);
+    public function __construct(array $configuration = null);
 
     /**
      * @param Log $log

@@ -19,9 +19,9 @@ class DatabaseEraser implements EraserInterface
      *
      * @param array $configuration
      */
-    public function __construct(array $configuration = [])
+    public function __construct(array $configuration = null)
     {
-        if (isset($configuration['logTable'])) {
+        if (null !== $configuration && isset($configuration['logTable'])) {
             $this->table = $configuration['logTable'];
         } else {
             $this->table = 'sys_log';

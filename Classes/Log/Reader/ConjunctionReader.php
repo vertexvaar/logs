@@ -24,12 +24,12 @@ class ConjunctionReader implements ReaderInterface
     protected $readers = [];
 
     /**
-     * ReaderCollection constructor.
+     * ConjunctionReader constructor.
      *
-     * @param array $configuration
+     * @param array|null $configuration
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function __construct(array $configuration = [])
+    public function __construct(array $configuration = null)
     {
         $readerFactory = GeneralUtility::makeInstance(ReaderFactory::class);
         $this->readers = $readerFactory->getReadersForWriters();
