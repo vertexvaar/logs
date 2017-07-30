@@ -25,7 +25,7 @@ class ConjunctionReader implements ReaderInterface
     public function __construct(array $configuration = null)
     {
         $readerFactory = GeneralUtility::makeInstance(ReaderFactory::class);
-        $this->readers = $readerFactory->getReadersForWriters();
+        $this->readers = $readerFactory->getReadersForWriters($configuration);
     }
 
     /**
