@@ -20,7 +20,7 @@ class ConjunctionEraser implements EraserInterface
      * @param array $configuration
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function __construct(array $configuration = [])
+    public function __construct(array $configuration = null)
     {
         $eraserFactory = GeneralUtility::makeInstance(EraserFactory::class);
         $this->eraser = $eraserFactory->getErasersForWriters();

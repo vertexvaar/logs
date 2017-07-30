@@ -12,9 +12,9 @@ interface ReaderInterface
     /**
      * ReaderInterface constructor.
      *
-     * @param array $configuration
+     * @param array|null $configuration
      */
-    public function __construct(array $configuration = []);
+    public function __construct(array $configuration = null);
 
     /**
      * @param Filter $filter
