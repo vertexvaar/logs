@@ -1,10 +1,12 @@
 CREATE TABLE tx_logs_log (
-  request_id varchar(13) DEFAULT '' NOT NULL,
-  time_micro double(16,4) NOT NULL default '0.0000',
-  component varchar(255) DEFAULT '' NOT NULL,
-  level tinyint(1) unsigned DEFAULT '0' NOT NULL,
-  message text,
-  data text,
+	uid INT(11) NOT NULL AUTO_INCREMENT,
+	request_id VARCHAR(13) DEFAULT '' NOT NULL,
+	time_micro DOUBLE(16,4) NOT NULL DEFAULT '0.0000',
+	component VARCHAR(255) DEFAULT '' NOT NULL,
+	level TINYINT(1) UNSIGNED DEFAULT '0' NOT NULL,
+	message TEXT,
+	data TEXT,
 
-  KEY request (request_id)
+	PRIMARY KEY (uid),
+	KEY request (request_id)
 );

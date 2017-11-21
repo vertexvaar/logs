@@ -50,8 +50,8 @@ destinations (tables, files, etc.)
 
 PHP 5.3 reached its end of life and TYPO3 6.2 will end in 31 March 2017. There is no point in supporting those two anymore.
 PHP 5.4 and 5.5 are no longer supported by the PHP group, but they are still widely used.
-I want encourage you to upgrade to at least PHP 5.6, but if you are tied to it then you can still go with the v1 branch of logs.
-The v2 branch will require at least PHP 7.0 but still support TYPO3 7.6. (Maybe not every tiniest feature, but it will still do everything it's supposed to)
+I want to encourage you to upgrade to at least PHP 5.6, but if you are tied to it then you can still go with the v1 branch of logs.
+The v2 branch is is based on Doctrine DBAL, therefore requires TYPO3 v8 or higher.
 
 ## TODO
 
