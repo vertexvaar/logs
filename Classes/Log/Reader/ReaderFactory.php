@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 namespace VerteXVaaR\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
