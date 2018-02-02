@@ -83,7 +83,7 @@ class DatabaseReader implements ReaderInterface
         }
         $component = $filter->getComponent();
         if (!empty($component)) {
-            $where[] = Filter::ORDER_COMPONENT . ' = "%' . $this->escapeString($component) . '%"';
+            $where[] = Filter::ORDER_COMPONENT . ' LIKE "%' . $this->escapeString($component) . '%"';
         }
         return implode(' AND ', $where);
     }
