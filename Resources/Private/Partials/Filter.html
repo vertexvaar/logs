@@ -1,0 +1,87 @@
+<h1>
+	<f:translate extensionName="logs" key="filter">filter</f:translate>
+</h1>
+<f:form action="filter" object="{filter}" objectName="filter" style="margin-bottom:15px;">
+	<fieldset class="form-section">
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_request_id">
+					<f:translate extensionName="logs" key="filter.request_id">request id</f:translate>
+				</label>
+				<f:form.textfield property="requestId" id="tx_logs_filter_request_id" class="form-control form-control-adapt" />
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_component">
+					<f:translate extensionName="logs" key="filter.component">component</f:translate>
+				</label>
+				<f:form.textfield property="component" id="tx_logs_filter_component" class="form-control form-control-adapt" />
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_from_time">
+					<f:translate extensionName="logs" key="filter.from_time">from time</f:translate>
+				</label>
+				<f:form.textfield property="fromTime" id="tx_logs_filter_from_time" class="form-control form-control-adapt" />
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_to_time">
+					<f:translate extensionName="logs" key="filter.to_time">to time</f:translate>
+				</label>
+				<f:form.textfield property="toTime" id="tx_logs_filter_to_time" class="form-control form-control-adapt" />
+			</div>
+		</div>
+	</fieldset>
+	<fieldset class="form-section">
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<label>
+					<f:translate extensionName="logs" key="verbosity">verbosity</f:translate>
+				</label>
+				<div class="checkbox">
+					<label for="tx_logs_filter_show_data">
+						<f:form.checkbox property="showData" value="1" id="tx_logs_filter_show_data" />
+						<f:translate extensionName="logs" key="filter.show_data">show data</f:translate>
+					</label>
+				</div>
+				<div class="checkbox">
+					<label for="tx_logs_filter_full_message">
+						<f:form.checkbox property="fullMessage" value="1" id="tx_logs_filter_full_message" />
+						<f:translate extensionName="logs" key="filter.full_message">crop message</f:translate>
+					</label>
+				</div>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_level">
+					<f:translate extensionName="logs" key="filter.level">minimum log level</f:translate>
+				</label>
+				<f:form.select property="level" options="{filter.logLevels}" id="tx_logs_filter_level" class="form-control form-control-adapt" />
+			</div>
+		</div>
+	</fieldset>
+	<fieldset class="form-section">
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_order_field">
+					<f:translate extensionName="logs" key="filter.order_field">order field</f:translate>
+				</label>
+				<f:form.select property="orderField" options="{filter.orderFields}" id="tx_logs_filter_order_field" class="form-control form-control-adapt" />
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_order_direction">
+					<f:translate extensionName="logs" key="filter.order_direction">order direction</f:translate>
+				</label>
+				<f:form.select property="orderDirection" options="{filter.orderDirections}" id="tx_logs_filter_order_direction" class="form-control form-control-adapt" />
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="tx_logs_filter_limit">
+					<f:translate extensionName="logs" key="filter.limit">limit</f:translate>
+				</label>
+				<f:form.textfield property="limit" id="tx_logs_filter_limit" class="form-control form-control-adapt" />
+			</div>
+		</div>
+	</fieldset>
+	<fieldset class="form-section">
+		<div class="form-group">
+			<f:form.submit value="{f:translate(key:'search',default:'search')}" class="form-control form-control-adapt" />
+		</div>
+	</fieldset>
+</f:form>

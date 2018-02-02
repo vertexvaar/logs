@@ -1,0 +1,53 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" xmlns:logs="http://typo3.org/ns/VerteXVaaR/Logs/ViewHelpers" data-namespace-typo3-fluid="true">
+	<h1>
+		<f:translate extensionName="logs" key="logs">logs</f:translate>
+		({logs -> f:count()})
+	</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<f:translate extensionName="logs" key="filter.request_id">request id</f:translate>
+				</th>
+				<th>
+					<f:translate extensionName="logs" key="filter.time_micro">micro time</f:translate>
+				</th>
+				<th>
+					<f:translate extensionName="logs" key="filter.component">component</f:translate>
+				</th>
+				<th>
+					<f:translate extensionName="logs" key="filter.level">level</f:translate>
+				</th>
+				<th>
+					<f:translate extensionName="logs" key="filter.message">message</f:translate>
+				</th>
+				<f:if condition="{filter.showData}">
+					<th>data</th>
+				</f:if>
+				<th>
+					<f:translate extensionName="logs" key="actions">actions</f:translate>
+				</th>
+			</tr>
+		</thead>
+		<f:for each="{logs}" as="log">
+			<tr>
+				<td>{log.requestId}</td>
+				<td>
+					<logs:format.microtime microTime="{log.timeMicro}" />
+					<br />({log.timeMicro})
+				</td>
+				<td>{log.component}</td>
+				<td>{log.level}</td>
+				<td>{log.message}</td>
+				<f:if condition="{filter.showData}">
+					<td>{log.data -> f:debug(inline:'true')}</td>
+				</f:if>
+				<td>
+					<f:link.action action="delete" arguments="{requestId:log.requestId,timeMicro:log.timeMicro,component:log.component,level:log.level,message:log.message}" class="btn btn-default">
+						<core:icon identifier="actions-delete" />
+					</f:link.action>
+				</td>
+			</tr>
+		</f:for>
+	</table>
+</html>
