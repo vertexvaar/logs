@@ -1,0 +1,15 @@
+module.tx_logs {
+	view {
+		layoutRootPaths {
+			10 = EXT:logs/Resources/Private/Html/logs/Layouts
+		}
+
+		partialRootPaths {
+			10 = EXT:logs/Resources/Private/Html/logs/Partials
+		}
+
+		templateRootPaths {
+			10 = EXT:logs/Resources/Private/Html/logs/Templates
+		}
+	}
+}
