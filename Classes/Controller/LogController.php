@@ -43,6 +43,9 @@ class LogController extends ActionController
      * @param string $component
      * @param string $level
      * @param string $message
+     *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
     public function deleteAction($requestId, $timeMicro, $component, $level, $message)
     {
