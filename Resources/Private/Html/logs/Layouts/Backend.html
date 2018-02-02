@@ -1,29 +1,24 @@
-<f:be.container>
-	<div class="module" data-module-id="" data-module-name="">
-		<div class="module-docheader t3js-module-docheader">
-			<div
-				class="module-docheader-bar module-docheader-bar-navigation t3js-module-docheader-bar t3js-module-docheader-bar-navigation">
-				<div class="module-docheader-bar-column-left"></div>
-				<div class="module-docheader-bar-column-right"></div>
-			</div>
-			<div
-				class="module-docheader-bar module-docheader-bar-buttons t3js-module-docheader-bar t3js-module-docheader-bar-buttons">
-				<div class="module-docheader-bar-column-left">
-					<f:render section="LeftToolBar"/>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:be.container>
+		<div class="module" data-module-id="" data-module-name="">
+			<div class="module-docheader t3js-module-docheader">
+				<div
+					class="module-docheader-bar module-docheader-bar-navigation t3js-module-docheader-bar t3js-module-docheader-bar-navigation">
+					<div class="module-docheader-bar-column-left"></div>
+					<div class="module-docheader-bar-column-right"></div>
 				</div>
-				<div class="module-docheader-bar-column-right">
-					<f:render section="RightToolBar"/>
+				<div
+					class="module-docheader-bar module-docheader-bar-buttons t3js-module-docheader-bar t3js-module-docheader-bar-buttons">
+					<div class="module-docheader-bar-column-left"></div>
+					<div class="module-docheader-bar-column-right"></div>
 				</div>
 			</div>
+
+			<div class="module-body t3js-module-body" style="padding-top: 89px;">
+				<f:flashMessages />
+
+				<f:render section="Main" />
+			</div>
 		</div>
-
-		<div class="module-body t3js-module-body" style="padding-top: 89px;">
-			<f:render section="Welcome"/>
-
-			<f:flashMessages/>
-
-			<f:render section="Main"/>
-		</div>
-
-	</div>
-</f:be.container>
+	</f:be.container>
+</html>
