@@ -60,7 +60,7 @@ class DatabaseReader implements ReaderInterface
     protected function getWhereClausByFilter(Filter $filter)
     {
         $where = [
-            'level<=' . $filter->getLevel(),
+            'level <= ' . $filter->getLevel(),
             'message IS NOT NULL',
         ];
         $requestId = $filter->getRequestId();
