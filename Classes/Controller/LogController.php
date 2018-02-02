@@ -14,6 +14,12 @@ use VerteXVaaR\Logs\Log\Reader\ConjunctionReader;
 class LogController extends ActionController
 {
     /**
+     * @var array|null
+     * @api Overwrite this property in your inheriting controller with your log config to restrict log readers
+     */
+    protected $logConfiguration = null;
+
+    /**
      * @param Filter|null $filter
      */
     public function filterAction(Filter $filter = null)
@@ -24,8 +30,11 @@ class LogController extends ActionController
             $filter = GeneralUtility::makeInstance(Filter::class);
         }
 
+        $reader = GeneralUtility::makeInstance(ConjunctionReader::class, $this->logConfiguration);
+        $logs = $reader->findByFilter($filter);
+
         $this->view->assign('filter', $filter);
-        $this->view->assign('logs', GeneralUtility::makeInstance(ConjunctionReader::class)->findByFilter($filter));
+        $this->view->assign('logs', $logs);
     }
 
     /**
@@ -38,7 +47,7 @@ class LogController extends ActionController
     public function deleteAction($requestId, $timeMicro, $component, $level, $message)
     {
         $log = GeneralUtility::makeInstance(Log::class, $requestId, $timeMicro, $component, $level, $message, []);
-        $conjunctionReader = GeneralUtility::makeInstance(ConjunctionEraser::class);
+        $conjunctionReader = GeneralUtility::makeInstance(ConjunctionEraser::class, $this->logConfiguration);
         $conjunctionReader->delete($log);
         $this->redirect('filter');
     }
