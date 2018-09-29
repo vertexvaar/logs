@@ -1,27 +1,33 @@
 <?php
 namespace VerteXVaaR\Logs\ViewHelpers\Format;
 
-use Closure;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class MicrotimeViewHelper
  */
-class MicrotimeViewHelper extends AbstractViewHelper implements CompilableInterface
+class MicrotimeViewHelper extends AbstractViewHelper
 {
     /**
-     * @param float $microTime
-     * @param string $format
+     *
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('microTime', 'float', 'Value returned by microtime(true)', true);
+        $this->registerArgument('format', 'string', 'Resulting format', false, 'Y-m-d H:i:s.u');
+    }
+
+    /**
      * @return string
      */
-    public function render($microTime, $format = 'Y-m-d H:i:s.u')
+    public function render(): string
     {
         return static::renderStatic(
             [
-                'microTime' => $microTime,
-                'format' => $format,
+                'microTime' => $this->arguments['microTime'],
+                'format' => $this->arguments['format'],
             ],
             $this->buildRenderChildrenClosure(),
             $this->renderingContext
@@ -30,15 +36,17 @@ class MicrotimeViewHelper extends AbstractViewHelper implements CompilableInterf
 
     /**
      * @param array $arguments
-     * @param Closure $renderChildrenClosure
+     * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return string
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public static function renderStatic(
         array $arguments,
-        Closure $renderChildrenClosure,
+        \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    ): string {
         $microTime = $arguments['microTime'];
         $format = $arguments['format'];
 

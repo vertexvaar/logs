@@ -1,7 +1,9 @@
 <?php
 namespace VerteXVaaR\Logs\Log\Eraser;
 
-use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Log;
 
 /**
@@ -15,6 +17,11 @@ class DatabaseEraser implements EraserInterface
     protected $table = 'sys_log';
 
     /**
+     * @var Connection
+     */
+    protected $connection = null;
+
+    /**
      * DatabaseEraser constructor.
      *
      * @param array $configuration
@@ -26,6 +33,7 @@ class DatabaseEraser implements EraserInterface
         } else {
             $this->table = 'sys_log';
         }
+        $this->connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->table);
     }
 
     /**
@@ -33,39 +41,21 @@ class DatabaseEraser implements EraserInterface
      */
     public function delete(Log $log)
     {
-        $this->getDatabase()->exec_DELETEquery($this->table, $this->getWhere($log));
+        $this->connection->delete($this->table, $this->getWhere($log));
     }
 
     /**
      * @param Log $log
-     * @return string
+     * @return array
      */
-    protected function getWhere(Log $log)
+    protected function getWhere(Log $log): array
     {
-        $whereParts = [];
-        $whereParts[] = 'request_id LIKE "' . $this->escape($log->getRequestId()) . '"';
-        $whereParts[] = 'time_micro LIKE "' . $this->escape($log->getTimeMicro()) . '"';
-        $whereParts[] = 'component LIKE "' . $this->escape($log->getComponent()) . '"';
-        $whereParts[] = 'level LIKE "' . $this->escape($log->getLevel()) . '"';
-        $whereParts[] = 'message LIKE "' . $this->escape($log->getMessage()) . '"';
-        return implode(' AND ', $whereParts);
-    }
-
-    /**
-     * @param string $string
-     * @return string
-     */
-    protected function escape($string)
-    {
-        return $this->getDatabase()->quoteStr($string, $this->table);
-    }
-
-    /**
-     * @return DatabaseConnection
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function getDatabase()
-    {
-        return $GLOBALS['TYPO3_DB'];
+        return [
+            'request_id' => $log->getRequestId(),
+            'time_micro' => $log->getTimeMicro(),
+            'component' => $log->getComponent(),
+            'level' => $log->getLevel(),
+            'message' => $log->getMessage(),
+        ];
     }
 }

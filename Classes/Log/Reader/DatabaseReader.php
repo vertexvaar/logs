@@ -1,8 +1,9 @@
 <?php
 namespace VerteXVaaR\Logs\Log\Reader;
 
-use TYPO3\CMS\Core\Database\DatabaseConnection;
-use TYPO3\CMS\Core\Database\PreparedStatement;
+use Doctrine\DBAL\Driver\Statement;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
@@ -23,6 +24,11 @@ class DatabaseReader implements ReaderInterface
     protected $table = '';
 
     /**
+     * @var Connection
+     */
+    protected $connection = null;
+
+    /**
      * DatabaseReader constructor.
      *
      * @param array|null $configuration
@@ -34,6 +40,7 @@ class DatabaseReader implements ReaderInterface
         } else {
             $this->table = 'sys_log';
         }
+        $this->connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->table);
     }
 
     /**
@@ -42,13 +49,18 @@ class DatabaseReader implements ReaderInterface
      */
     public function findByFilter(Filter $filter)
     {
-        $statement = $this->getDatabase()->prepare_SELECTquery(
-            $this->getSelectFieldsByFilter($filter),
-            $this->table,
-            $this->getWhereClausByFilter($filter),
-            '',
-            $filter->getOrderField() . ' ' . $filter->getOrderDirection(),
-            $filter->getLimit()
+        $fields = $this->getSelectFieldsByFilter($filter);
+        $constraints = $this->getWhereClausByFilter($filter);
+        $orderField = $filter->getOrderField();
+        $orderDirection = $filter->getOrderDirection();
+        $limit = $filter->getLimit();
+        $statement = $this->connection->query(<<<SQL
+            SELECT {$fields}
+            FROM {$this->table}
+            WHERE {$constraints}
+            ORDER BY {$orderField} {$orderDirection}
+            LIMIT {$limit}
+SQL
         );
         return $this->fetchLogsByStatement($statement);
     }
@@ -67,23 +79,23 @@ class DatabaseReader implements ReaderInterface
         if (!empty($requestId)) {
             /* @see \TYPO3\CMS\Core\Core\Bootstrap::__construct for requestId string length */
             if (13 === strlen($requestId)) {
-                $where[] = Filter::ORDER_REQUEST_ID . ' = "' . $this->escapeString($requestId) . '"';
+                $where[] = Filter::ORDER_REQUEST_ID . ' = ' . $this->quoteString($requestId);
             } else {
-                $where[] = Filter::ORDER_REQUEST_ID . ' LIKE "%' . $this->escapeString($requestId) . '%"';
+                $where[] = Filter::ORDER_REQUEST_ID . ' LIKE ' . $this->quoteString("%$requestId%");
             }
         }
         $fromTime = $filter->getFromTime();
         if (!empty($fromTime)) {
-            $where[] = Filter::ORDER_TIME_MICRO . ' >= ' . $this->escapeString($fromTime);
+            $where[] = Filter::ORDER_TIME_MICRO . ' >= ' . $this->quoteString($fromTime);
         }
         $toTime = $filter->getToTime();
         if (!empty($toTime)) {
             // Add +1 to the timestamp to ignore additional microseconds when comparing. UX stuff, you know ;)
-            $where[] = Filter::ORDER_TIME_MICRO . ' <= ' . $this->escapeString($toTime + 1);
+            $where[] = Filter::ORDER_TIME_MICRO . ' <= ' . $this->quoteString($toTime + 1);
         }
         $component = $filter->getComponent();
         if (!empty($component)) {
-            $where[] = Filter::ORDER_COMPONENT . ' LIKE "%' . $this->escapeString($component) . '%"';
+            $where[] = Filter::ORDER_COMPONENT . ' LIKE ' . $this->quoteString("%$component%");
         }
         return implode(' AND ', $where);
     }
@@ -101,14 +113,14 @@ class DatabaseReader implements ReaderInterface
     }
 
     /**
-     * @param PreparedStatement $statement
+     * @param Statement $statement
      * @return Log[]
      */
-    protected function fetchLogsByStatement(PreparedStatement $statement)
+    protected function fetchLogsByStatement(Statement $statement)
     {
         $logs = [];
-        $statement->setFetchMode(PreparedStatement::FETCH_NUM);
 
+        $statement->setFetchMode(\PDO::FETCH_NUM);
         if ($statement->execute()) {
             while (($row = $statement->fetch())) {
                 $row[5] = json_decode(substr($row[5], 2), true);
@@ -134,17 +146,8 @@ class DatabaseReader implements ReaderInterface
      * @param string $string
      * @return string
      */
-    protected function escapeString($string)
+    protected function quoteString($string)
     {
-        return $this->getDatabase()->escapeStrForLike($string, 'sys_log');
-    }
-
-    /**
-     * @return DatabaseConnection
-     * @SuppressWarnings("PHPMD.Superglobals")
-     */
-    protected function getDatabase()
-    {
-        return $GLOBALS['TYPO3_DB'];
+        return $this->connection->quote($string);
     }
 }
