@@ -12,14 +12,8 @@ use function is_array;
 use function strcmp;
 use function usort;
 
-/**
- * Class ReaderCollection
- */
 class ConjunctionReader implements ReaderInterface
 {
-    /**
-     * @var array
-     */
     protected static $writerReaderMapping = [
         DatabaseWriter::class => DatabaseReader::class,
     ];
@@ -29,12 +23,6 @@ class ConjunctionReader implements ReaderInterface
      */
     protected $readers = [];
 
-    /**
-     * ConjunctionReader constructor.
-     *
-     * @param array|null $configuration
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
     public function __construct(array $configuration = null)
     {
         $readerFactory = GeneralUtility::makeInstance(ReaderFactory::class);
@@ -45,7 +33,7 @@ class ConjunctionReader implements ReaderInterface
      * @param Filter $filter
      * @return Log[]
      */
-    public function findByFilter(Filter $filter)
+    public function findByFilter(Filter $filter): array
     {
         $logs = [];
         foreach ($this->readers as $reader) {
@@ -69,7 +57,7 @@ class ConjunctionReader implements ReaderInterface
     /**
      * @return ReaderInterface[]
      */
-    public function getReaders()
+    public function getReaders(): array
     {
         return $this->readers;
     }
@@ -85,7 +73,7 @@ class ConjunctionReader implements ReaderInterface
     /**
      * @param ReaderInterface[] $readers
      */
-    public function addReaders($readers)
+    public function addReaders(array $readers)
     {
         foreach ($readers as $reader) {
             $this->addReader($reader);
@@ -100,11 +88,7 @@ class ConjunctionReader implements ReaderInterface
         $this->readers[] = $reader;
     }
 
-    /**
-     * @param array|null $logConfiguration
-     * @return array
-     */
-    protected function getReadersForWriters(array $logConfiguration = null)
+    protected function getReadersForWriters(array $logConfiguration = null): array
     {
         if (null === $logConfiguration) {
             $logConfiguration = $this->getLogConfiguration();
@@ -133,10 +117,9 @@ class ConjunctionReader implements ReaderInterface
     }
 
     /**
-     * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected function getLogConfiguration()
+    protected function getLogConfiguration(): array
     {
         return $GLOBALS['TYPO3_CONF_VARS']['LOG'];
     }

@@ -1,9 +1,9 @@
 <?php
 namespace VerteXVaaR\Logs\Log\Reader;
 
+use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Statement;
 use PDO;
-use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Filter;
@@ -13,31 +13,14 @@ use function json_decode;
 use function strlen;
 use function substr;
 
-/**
- * Class DatabaseReader
- */
 class DatabaseReader implements ReaderInterface
 {
-    /**
-     * @var array
-     */
     protected $selectFields = ['request_id', 'time_micro', 'component', 'level', 'message', 'data'];
 
-    /**
-     * @var string
-     */
     protected $table = '';
 
-    /**
-     * @var Connection
-     */
     protected $connection = null;
 
-    /**
-     * DatabaseReader constructor.
-     *
-     * @param array|null $configuration
-     */
     public function __construct(array $configuration = null)
     {
         if (null !== $configuration && isset($configuration['logTable'])) {
@@ -51,8 +34,9 @@ class DatabaseReader implements ReaderInterface
     /**
      * @param Filter $filter
      * @return Log[]
+     * @throws DBALException
      */
-    public function findByFilter(Filter $filter)
+    public function findByFilter(Filter $filter): array
     {
         $fields = $this->getSelectFieldsByFilter($filter);
         $constraints = $this->getWhereClausByFilter($filter);
@@ -71,11 +55,7 @@ SQL
         return $this->fetchLogsByStatement($statement);
     }
 
-    /**
-     * @param Filter $filter
-     * @return string
-     */
-    protected function getWhereClausByFilter(Filter $filter)
+    protected function getWhereClausByFilter(Filter $filter): string
     {
         $where = [
             'level <= ' . $filter->getLevel(),
@@ -106,11 +86,7 @@ SQL
         return implode(' AND ', $where);
     }
 
-    /**
-     * @param Filter $filter
-     * @return string
-     */
-    protected function getSelectFieldsByFilter(Filter $filter)
+    protected function getSelectFieldsByFilter(Filter $filter): string
     {
         $selectFields = $this->selectFields;
         $filter->isFullMessage() ?: $selectFields[4] = 'CONCAT(LEFT(message , 120), "...") as message';
@@ -122,7 +98,7 @@ SQL
      * @param Statement $statement
      * @return Log[]
      */
-    protected function fetchLogsByStatement(Statement $statement)
+    protected function fetchLogsByStatement(Statement $statement): array
     {
         $logs = [];
 
@@ -148,11 +124,7 @@ SQL
         return $logs;
     }
 
-    /**
-     * @param string $string
-     * @return string
-     */
-    protected function quoteString($string)
+    protected function quoteString(string $string): string
     {
         return $this->connection->quote($string);
     }

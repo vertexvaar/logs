@@ -6,14 +6,8 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Log;
 
-/**
- * Class DatabaseEraser
- */
 class DatabaseEraser implements EraserInterface
 {
-    /**
-     * @var string
-     */
     protected $table = 'sys_log';
 
     /**
@@ -21,11 +15,6 @@ class DatabaseEraser implements EraserInterface
      */
     protected $connection = null;
 
-    /**
-     * DatabaseEraser constructor.
-     *
-     * @param array $configuration
-     */
     public function __construct(array $configuration = null)
     {
         if (null !== $configuration && isset($configuration['logTable'])) {
@@ -36,18 +25,11 @@ class DatabaseEraser implements EraserInterface
         $this->connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->table);
     }
 
-    /**
-     * @param Log $log
-     */
     public function delete(Log $log)
     {
         $this->connection->delete($this->table, $this->getWhere($log));
     }
 
-    /**
-     * @param Log $log
-     * @return array
-     */
     protected function getWhere(Log $log): array
     {
         return [

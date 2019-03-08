@@ -6,9 +6,6 @@ use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use function get_object_vars;
 
-/**
- * Class Filter
- */
 class Filter
 {
     const SORTING_DESC = 'DESC';
@@ -18,232 +15,134 @@ class Filter
     const ORDER_COMPONENT = 'component';
     const ORDER_LEVEL = 'level';
 
-    /**
-     * @var string
-     */
     protected $requestId = '';
 
-    /**
-     * @var int
-     */
     protected $level = LogLevel::NOTICE;
 
-    /**
-     * @var int
-     */
     protected $fromTime = 0;
 
-    /**
-     * @var int
-     */
     protected $toTime = 0;
 
-    /**
-     * @var bool
-     */
     protected $showData = false;
 
-    /**
-     * @var string
-     */
     protected $component = '';
 
-    /**
-     * @var bool
-     */
     protected $fullMessage = true;
 
-    /**
-     * @var int
-     */
     protected $limit = 150;
 
-    /**
-     * @var string
-     */
     protected $orderField = self::ORDER_TIME_MICRO;
 
-    /**
-     * @var string
-     */
     protected $orderDirection = self::SORTING_DESC;
 
-    /**
-     * Filter constructor.
-     *
-     * @param bool $loadFromSession
-     */
-    public function __construct($loadFromSession = true)
+    public function __construct(bool $loadFromSession = true)
     {
         if (true === $loadFromSession) {
             $this->loadFromSession();
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getRequestId()
+    public function getRequestId(): string
     {
         return $this->requestId;
     }
 
-    /**
-     * @param string $requestId
-     */
-    public function setRequestId($requestId)
+    public function setRequestId(string $requestId)
     {
         $this->requestId = $requestId;
     }
 
-    /**
-     * @return int
-     */
-    public function getLevel()
+    public function getLevel(): int
     {
         return (int)$this->level;
     }
 
-    /**
-     * @param int $level
-     */
-    public function setLevel($level)
+    public function setLevel(int $level)
     {
         $this->level = $level;
     }
 
-    /**
-     * @return int
-     */
-    public function getFromTime()
+    public function getFromTime(): int
     {
         return $this->fromTime;
     }
 
-    /**
-     * @param int $fromTime
-     */
-    public function setFromTime($fromTime)
+    public function setFromTime(int $fromTime)
     {
         $this->fromTime = $fromTime;
     }
 
-    /**
-     * @return int
-     */
-    public function getToTime()
+    public function getToTime(): int
     {
         return $this->toTime;
     }
 
-    /**
-     * @param int $toTime
-     */
-    public function setToTime($toTime)
+    public function setToTime(int $toTime)
     {
         $this->toTime = $toTime;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isShowData()
+    public function isShowData(): bool
     {
         return $this->showData;
     }
 
-    /**
-     * @param boolean $showData
-     */
-    public function setShowData($showData)
+    public function setShowData(bool $showData)
     {
         $this->showData = $showData;
     }
 
-    /**
-     * @return string
-     */
-    public function getComponent()
+    public function getComponent(): string
     {
         return $this->component;
     }
 
-    /**
-     * @param string $component
-     */
-    public function setComponent($component)
+    public function setComponent(string $component)
     {
         $this->component = $component;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isFullMessage()
+    public function isFullMessage(): bool
     {
         return $this->fullMessage;
     }
 
-    /**
-     * @param boolean $fullMessage
-     */
-    public function setFullMessage($fullMessage)
+    public function setFullMessage(bool $fullMessage)
     {
         $this->fullMessage = $fullMessage;
     }
 
-    /**
-     * @return int
-     */
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
 
-    /**
-     * @param int $limit
-     */
-    public function setLimit($limit)
+    public function setLimit(int $limit)
     {
         $this->limit = $limit;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrderField()
+    public function getOrderField(): string
     {
         return $this->orderField;
     }
 
-    /**
-     * @param string $orderField
-     */
-    public function setOrderField($orderField)
+    public function setOrderField(string $orderField)
     {
         $this->orderField = $orderField;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrderDirection()
+    public function getOrderDirection(): string
     {
         return $this->orderDirection;
     }
 
-    /**
-     * @param string $orderDirection
-     */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(string $orderDirection)
     {
         $this->orderDirection = $orderDirection;
     }
 
-    /**
-     * @return array
-     */
-    public function getLogLevels()
+    public function getLogLevels(): array
     {
         return [
             LogLevel::EMERGENCY => LogLevel::EMERGENCY . ' (' . \Psr\Log\LogLevel::EMERGENCY . ')',
@@ -257,10 +156,7 @@ class Filter
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function getOrderFields()
+    public function getOrderFields(): array
     {
         return [
             static::ORDER_TIME_MICRO => LocalizationUtility::translate('filter.time_micro', 'logs'),
@@ -270,10 +166,7 @@ class Filter
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function getOrderDirections()
+    public function getOrderDirections(): array
     {
         return [
             static::SORTING_DESC => LocalizationUtility::translate('filter.desc', 'logs'),
@@ -281,17 +174,11 @@ class Filter
         ];
     }
 
-    /**
-     *
-     */
     public function saveToSession()
     {
         $this->getBackendUser()->setAndSaveSessionData('tx_logs_filter', $this);
     }
 
-    /**
-     *
-     */
     public function loadFromSession()
     {
         $filter = $this->getBackendUser()->getSessionData('tx_logs_filter');
@@ -303,11 +190,9 @@ class Filter
     }
 
     /**
-     * @return BackendUserAuthentication
-     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected function getBackendUser()
+    protected function getBackendUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }

@@ -10,9 +10,6 @@ use VerteXVaaR\Logs\Domain\Model\Log;
 use VerteXVaaR\Logs\Log\Eraser\ConjunctionEraser;
 use VerteXVaaR\Logs\Log\Reader\ConjunctionReader;
 
-/**
- * Class LogController
- */
 class LogController extends ActionController
 {
     /**

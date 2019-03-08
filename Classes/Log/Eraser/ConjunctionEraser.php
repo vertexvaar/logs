@@ -4,9 +4,6 @@ namespace VerteXVaaR\Logs\Log\Eraser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Log;
 
-/**
- * Class ConjunctionEraser
- */
 class ConjunctionEraser implements EraserInterface
 {
     /**
@@ -15,9 +12,6 @@ class ConjunctionEraser implements EraserInterface
     protected $eraser = [];
 
     /**
-     * ConjunctionEraser constructor.
-     *
-     * @param array $configuration
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __construct(array $configuration = null)
@@ -26,9 +20,6 @@ class ConjunctionEraser implements EraserInterface
         $this->eraser = $eraserFactory->getErasersForWriters($configuration);
     }
 
-    /**
-     * @param Log $log
-     */
     public function delete(Log $log)
     {
         foreach ($this->eraser as $eraser) {

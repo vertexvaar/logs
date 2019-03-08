@@ -6,14 +6,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use function array_merge;
 use function is_array;
 
-/**
- * Class EraserFactory
- */
 class EraserFactory
 {
-    /**
-     * @var array
-     */
     protected static $writerEraserMapping = [
         DatabaseWriter::class => DatabaseEraser::class,
     ];
@@ -23,7 +17,7 @@ class EraserFactory
      *     configuration if you want only the erasers for the given writers
      * @return array
      */
-    public function getErasersForWriters(array $logConfiguration = null)
+    public function getErasersForWriters(array $logConfiguration = null): array
     {
         if (null === $logConfiguration) {
             $logConfiguration = $this->getLogConfiguration();
@@ -52,11 +46,9 @@ class EraserFactory
     }
 
     /**
-     * @return array
-     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected function getLogConfiguration()
+    protected function getLogConfiguration(): array
     {
         return $GLOBALS['TYPO3_CONF_VARS']['LOG'];
     }

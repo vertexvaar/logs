@@ -8,13 +8,11 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use function strpos;
 
 /**
- * Class MicrotimeViewHelper
+ * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
 class MicrotimeViewHelper extends AbstractViewHelper
 {
-    /**
-     *
-     */
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -22,9 +20,6 @@ class MicrotimeViewHelper extends AbstractViewHelper
         $this->registerArgument('format', 'string', 'Resulting format', false, 'Y-m-d H:i:s.u');
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         return static::renderStatic(
@@ -37,14 +32,6 @@ class MicrotimeViewHelper extends AbstractViewHelper
         );
     }
 
-    /**
-     * @param array $arguments
-     * @param Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return string
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     * @SuppressWarnings(PHPMD.LongVariable)
-     */
     public static function renderStatic(
         array $arguments,
         Closure $renderChildrenClosure,
