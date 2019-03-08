@@ -58,6 +58,7 @@ As of 2019 and version 2.0 of this extension it requires/supports PHP 7.0 and TY
 * Ensure log sources are processed only once
 * Identify and fix that one bug that sometimes won't delete a log entry
 * ~~Save the current filter in the user data so it still applies after reopening the module or deletion of an entry~~
+* Add a log writer filter (to deselect log readers/erasers) #4
 
 ## Found a bug? Feedback?
 
