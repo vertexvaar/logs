@@ -3,6 +3,8 @@ namespace VerteXVaaR\Logs\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
 use VerteXVaaR\Logs\Log\Eraser\ConjunctionEraser;
@@ -44,8 +46,8 @@ class LogController extends ActionController
      * @param string $level
      * @param string $message
      *
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws StopActionException
+     * @throws UnsupportedRequestTypeException
      */
     public function deleteAction($requestId, $timeMicro, $component, $level, $message)
     {

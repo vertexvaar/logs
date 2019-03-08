@@ -1,6 +1,8 @@
 <?php
 namespace VerteXVaaR\Logs\ViewHelpers\Format;
 
+use Closure;
+use DateTime;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use function strpos;
@@ -37,7 +39,7 @@ class MicrotimeViewHelper extends AbstractViewHelper
 
     /**
      * @param array $arguments
-     * @param \Closure $renderChildrenClosure
+     * @param Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return string
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
@@ -45,18 +47,18 @@ class MicrotimeViewHelper extends AbstractViewHelper
      */
     public static function renderStatic(
         array $arguments,
-        \Closure $renderChildrenClosure,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
         $microTime = $arguments['microTime'];
         $format = $arguments['format'];
 
         if (false !== strpos($microTime, '.')) {
-            $dateTime = \DateTime::createFromFormat('U.u', $microTime);
+            $dateTime = DateTime::createFromFormat('U.u', $microTime);
         } elseif (false !== strpos(' ', $microTime)) {
-            $dateTime = \DateTime::createFromFormat('u U', $microTime);
+            $dateTime = DateTime::createFromFormat('u U', $microTime);
         } else {
-            $dateTime = \DateTime::createFromFormat('U', (int)$microTime);
+            $dateTime = DateTime::createFromFormat('U', (int)$microTime);
         }
 
         return $dateTime->format($format);

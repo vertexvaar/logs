@@ -2,6 +2,7 @@
 namespace VerteXVaaR\Logs\Log\Reader;
 
 use Doctrine\DBAL\Driver\Statement;
+use PDO;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -124,7 +125,7 @@ SQL
     {
         $logs = [];
 
-        $statement->setFetchMode(\PDO::FETCH_NUM);
+        $statement->setFetchMode(PDO::FETCH_NUM);
         if ($statement->execute()) {
             while (($row = $statement->fetch())) {
                 $row[5] = json_decode(substr($row[5], 2), true);

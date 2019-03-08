@@ -1,6 +1,7 @@
 <?php
 namespace VerteXVaaR\Logs\Log\Reader;
 
+use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use VerteXVaaR\Logs\Domain\Model\Filter;
@@ -20,7 +21,7 @@ class ConjunctionReader implements ReaderInterface
      * @var array
      */
     protected static $writerReaderMapping = [
-        'TYPO3\\CMS\\Core\\Log\\Writer\\DatabaseWriter' => 'VerteXVaaR\\Logs\\Log\\Reader\\DatabaseReader',
+        DatabaseWriter::class => DatabaseReader::class,
     ];
 
     /**
