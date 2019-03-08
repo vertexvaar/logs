@@ -16,7 +16,7 @@ call_user_func(
                 ['Log' => 'filter,delete,deleteAlike'],
                 [
                     'access' => 'user,group',
-                    'icon' => 'EXT:logs/ext_icon.svg',
+                    'icon' => 'EXT:logs/Resources/Public/Icons/Extension.svg',
                     'labels' => 'LLL:EXT:logs/Resources/Private/Language/locallang.module.xlf',
                 ]
             );
