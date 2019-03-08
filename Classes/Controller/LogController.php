@@ -19,7 +19,7 @@ class LogController extends ActionController
     protected $logConfiguration = null;
 
     /**
-     * @param Filter|null $filter
+     * @ignorevalidation filter
      */
     public function filterAction(Filter $filter = null)
     {
@@ -37,16 +37,10 @@ class LogController extends ActionController
     }
 
     /**
-     * @param string $requestId
-     * @param string $timeMicro
-     * @param string $component
-     * @param string $level
-     * @param string $message
-     *
      * @throws StopActionException
      * @throws UnsupportedRequestTypeException
      */
-    public function deleteAction($requestId, $timeMicro, $component, $level, $message)
+    public function deleteAction(string $requestId, float $timeMicro, string $component, int $level, string $message)
     {
         $log = GeneralUtility::makeInstance(Log::class, $requestId, $timeMicro, $component, $level, $message, []);
         $conjunctionReader = GeneralUtility::makeInstance(ConjunctionEraser::class, $this->logConfiguration);
