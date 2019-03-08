@@ -13,7 +13,7 @@ call_user_func(
                 $configuration['moduleConfig'],
                 'logs',
                 '',
-                ['Log' => 'filter,delete'],
+                ['Log' => 'filter,delete,deleteAlike'],
                 [
                     'access' => 'user,group',
                     'icon' => 'EXT:logs/ext_icon.svg',

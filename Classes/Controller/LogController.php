@@ -47,4 +47,16 @@ class LogController extends ActionController
         $conjunctionReader->delete($log);
         $this->redirect('filter');
     }
+
+    /**
+     * @throws StopActionException
+     * @throws UnsupportedRequestTypeException
+     */
+    public function deleteAlikeAction(string $component, int $level, string $message)
+    {
+        $log = GeneralUtility::makeInstance(Log::class, '', 0.0, $component, $level, $message, []);
+        $conjunctionReader = GeneralUtility::makeInstance(ConjunctionEraser::class, $this->logConfiguration);
+        $conjunctionReader->deleteAlike($log);
+        $this->redirect('filter');
+    }
 }

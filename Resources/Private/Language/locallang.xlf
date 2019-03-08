@@ -60,6 +60,13 @@
 			<trans-unit id="actions">
 				<source>Actions</source>
 			</trans-unit>
+
+			<trans-unit id="delete">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="delete_alike">
+				<source>Delete all alike</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

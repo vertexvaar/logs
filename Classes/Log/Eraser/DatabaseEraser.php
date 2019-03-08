@@ -40,4 +40,18 @@ class DatabaseEraser implements EraserInterface
             'message' => $log->getMessage(),
         ];
     }
+
+    public function deleteAlike(Log $log)
+    {
+        $this->connection->delete($this->table, $this->getWhereAlike($log));
+    }
+
+    protected function getWhereAlike(Log $log): array
+    {
+        return [
+            'component' => $log->getComponent(),
+            'level' => $log->getLevel(),
+            'message' => $log->getMessage(),
+        ];
+    }
 }

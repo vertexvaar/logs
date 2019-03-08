@@ -26,4 +26,11 @@ class ConjunctionEraser implements EraserInterface
             $eraser->delete($log);
         }
     }
+
+    public function deleteAlike(Log $log)
+    {
+        foreach ($this->eraser as $eraser) {
+            $eraser->deleteAlike($log);
+        }
+    }
 }
