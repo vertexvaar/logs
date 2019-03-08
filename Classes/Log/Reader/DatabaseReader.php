@@ -59,7 +59,8 @@ class DatabaseReader implements ReaderInterface
         $orderField = $filter->getOrderField();
         $orderDirection = $filter->getOrderDirection();
         $limit = $filter->getLimit();
-        $statement = $this->connection->query(<<<SQL
+        $statement = $this->connection->query(
+            <<<SQL
             SELECT {$fields}
             FROM {$this->table}
             WHERE {$constraints}
