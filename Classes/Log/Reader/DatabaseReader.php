@@ -7,6 +7,10 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
+use function implode;
+use function json_decode;
+use function strlen;
+use function substr;
 
 /**
  * Class DatabaseReader

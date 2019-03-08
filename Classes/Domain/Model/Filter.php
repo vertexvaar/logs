@@ -4,6 +4,7 @@ namespace VerteXVaaR\Logs\Domain\Model;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use function get_object_vars;
 
 /**
  * Class Filter

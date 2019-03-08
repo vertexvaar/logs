@@ -3,6 +3,7 @@ namespace VerteXVaaR\Logs\ViewHelpers\Format;
 
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use function strpos;
 
 /**
  * Class MicrotimeViewHelper

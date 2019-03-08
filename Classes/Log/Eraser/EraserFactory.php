@@ -3,6 +3,8 @@ namespace VerteXVaaR\Logs\Log\Eraser;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use function array_merge;
+use function is_array;
 
 /**
  * Class EraserFactory

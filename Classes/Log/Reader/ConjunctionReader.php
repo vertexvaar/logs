@@ -5,6 +5,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
+use function array_merge;
+use function array_slice;
+use function is_array;
+use function strcmp;
+use function usort;
 
 /**
  * Class ReaderCollection
