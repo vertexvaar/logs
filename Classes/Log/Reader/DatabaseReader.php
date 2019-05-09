@@ -13,14 +13,31 @@ use function json_decode;
 use function strlen;
 use function substr;
 
+/**
+ * Class DatabaseReader
+ */
 class DatabaseReader implements ReaderInterface
 {
+    /**
+     * @var array
+     */
     protected $selectFields = ['request_id', 'time_micro', 'component', 'level', 'message', 'data'];
 
+    /**
+     * @var string
+     */
     protected $table = '';
 
+    /**
+     * @var \TYPO3\CMS\Core\Database\Connection|null
+     */
     protected $connection = null;
 
+    /**
+     * DatabaseReader constructor.
+     *
+     * @param array|null $configuration
+     */
     public function __construct(array $configuration = null)
     {
         if (null !== $configuration && isset($configuration['logTable'])) {
@@ -55,6 +72,10 @@ SQL
         return $this->fetchLogsByStatement($statement);
     }
 
+    /**
+     * @param Filter $filter
+     * @return string
+     */
     protected function getWhereClausByFilter(Filter $filter): string
     {
         $where = [
@@ -86,6 +107,10 @@ SQL
         return implode(' AND ', $where);
     }
 
+    /**
+     * @param Filter $filter
+     * @return string
+     */
     protected function getSelectFieldsByFilter(Filter $filter): string
     {
         $selectFields = $this->selectFields;
@@ -124,6 +149,10 @@ SQL
         return $logs;
     }
 
+    /**
+     * @param string $string
+     * @return string
+     */
     protected function quoteString(string $string): string
     {
         return $this->connection->quote($string);

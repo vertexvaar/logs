@@ -6,8 +6,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use function array_merge;
 use function is_array;
 
+/**
+ * Class ReaderFactory
+ */
 class ReaderFactory
 {
+    /**
+     * @var array
+     */
     protected static $writerReaderMapping = [
         DatabaseWriter::class => DatabaseReader::class,
     ];
@@ -46,6 +52,8 @@ class ReaderFactory
     }
 
     /**
+     * @return array
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function getLogConfiguration(): array

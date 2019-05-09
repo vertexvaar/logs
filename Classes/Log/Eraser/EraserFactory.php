@@ -6,8 +6,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use function array_merge;
 use function is_array;
 
+/**
+ * Class EraserFactory
+ */
 class EraserFactory
 {
+    /**
+     * @var array
+     */
     protected static $writerEraserMapping = [
         DatabaseWriter::class => DatabaseEraser::class,
     ];

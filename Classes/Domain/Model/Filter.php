@@ -6,6 +6,9 @@ use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use function get_object_vars;
 
+/**
+ * Class Filter
+ */
 class Filter
 {
     const SORTING_DESC = 'DESC';

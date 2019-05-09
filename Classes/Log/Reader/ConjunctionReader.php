@@ -12,8 +12,14 @@ use function is_array;
 use function strcmp;
 use function usort;
 
+/**
+ * Class ConjunctionReader
+ */
 class ConjunctionReader implements ReaderInterface
 {
+    /**
+     * @var array
+     */
     protected static $writerReaderMapping = [
         DatabaseWriter::class => DatabaseReader::class,
     ];
@@ -88,6 +94,10 @@ class ConjunctionReader implements ReaderInterface
         $this->readers[] = $reader;
     }
 
+    /**
+     * @param array|null $logConfiguration
+     * @return array
+     */
     protected function getReadersForWriters(array $logConfiguration = null): array
     {
         if (null === $logConfiguration) {
@@ -117,6 +127,8 @@ class ConjunctionReader implements ReaderInterface
     }
 
     /**
+     * @return array
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function getLogConfiguration(): array

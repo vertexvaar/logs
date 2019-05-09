@@ -13,6 +13,9 @@ use function strpos;
  */
 class MicrotimeViewHelper extends AbstractViewHelper
 {
+    /**
+     *
+     */
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -20,6 +23,9 @@ class MicrotimeViewHelper extends AbstractViewHelper
         $this->registerArgument('format', 'string', 'Resulting format', false, 'Y-m-d H:i:s.u');
     }
 
+    /**
+     * @return string
+     */
     public function render(): string
     {
         return static::renderStatic(
@@ -32,6 +38,12 @@ class MicrotimeViewHelper extends AbstractViewHelper
         );
     }
 
+    /**
+     * @param array $arguments
+     * @param Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     * @return string
+     */
     public static function renderStatic(
         array $arguments,
         Closure $renderChildrenClosure,

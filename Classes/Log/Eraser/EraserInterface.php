@@ -3,10 +3,22 @@ namespace VerteXVaaR\Logs\Log\Eraser;
 
 use VerteXVaaR\Logs\Domain\Model\Log;
 
+/**
+ * Interface EraserInterface
+ */
 interface EraserInterface
 {
+    /**
+     * EraserInterface constructor.
+     *
+     * @param array|null $configuration
+     */
     public function __construct(array $configuration = null);
 
+    /**
+     * @param Log $log
+     * @return mixed
+     */
     public function delete(Log $log);
 
     /**

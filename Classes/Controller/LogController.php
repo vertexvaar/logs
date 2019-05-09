@@ -10,6 +10,9 @@ use VerteXVaaR\Logs\Domain\Model\Log;
 use VerteXVaaR\Logs\Log\Eraser\ConjunctionEraser;
 use VerteXVaaR\Logs\Log\Reader\ConjunctionReader;
 
+/**
+ * Class LogController
+ */
 class LogController extends ActionController
 {
     /**
@@ -19,6 +22,8 @@ class LogController extends ActionController
     protected $logConfiguration = null;
 
     /**
+     * @param Filter|null $filter
+     *
      * @ignorevalidation filter
      */
     public function filterAction(Filter $filter = null)
@@ -37,6 +42,12 @@ class LogController extends ActionController
     }
 
     /**
+     * @param string $requestId
+     * @param float $timeMicro
+     * @param string $component
+     * @param int $level
+     * @param string $message
+     *
      * @throws StopActionException
      * @throws UnsupportedRequestTypeException
      */
@@ -49,6 +60,10 @@ class LogController extends ActionController
     }
 
     /**
+     * @param string $component
+     * @param int $level
+     * @param string $message
+     *
      * @throws StopActionException
      * @throws UnsupportedRequestTypeException
      */
