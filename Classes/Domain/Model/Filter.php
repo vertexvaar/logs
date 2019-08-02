@@ -24,7 +24,7 @@ class Filter
     protected $requestId = '';
 
     /**
-     * @var int
+     * @var string
      */
     protected $level = LogLevel::NOTICE;
 
@@ -97,17 +97,17 @@ class Filter
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getLevel(): int
+    public function getLevel(): string
     {
-        return (int)$this->level;
+        return $this->level;
     }
 
     /**
-     * @param int $level
+     * @param string $level
      */
-    public function setLevel(int $level)
+    public function setLevel(string $level)
     {
         $this->level = $level;
     }
@@ -121,11 +121,11 @@ class Filter
     }
 
     /**
-     * @param int $fromTime
+     * @param int|null $fromTime
      */
-    public function setFromTime(int $fromTime)
+    public function setFromTime(int $fromTime = null)
     {
-        $this->fromTime = $fromTime;
+        $this->fromTime = (int)$fromTime;
     }
 
     /**
@@ -137,11 +137,11 @@ class Filter
     }
 
     /**
-     * @param int $toTime
+     * @param int|null $toTime
      */
-    public function setToTime(int $toTime)
+    public function setToTime(int $toTime = null)
     {
-        $this->toTime = $toTime;
+        $this->toTime = (int)$toTime;
     }
 
     /**

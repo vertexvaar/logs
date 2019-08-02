@@ -12,12 +12,12 @@
         "php": ">=7.0",
         "ext-json": "*",
         "ext-pdo": "*",
-        "typo3/cms-core": "^8.7 || ^9.5",
+        "typo3/cms-core": "^9.5 || ~10.0",
         "psr/log": "^1.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1.x-dev"
+            "dev-master": "3.0.x-dev"
         }
     }
 }

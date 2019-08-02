@@ -24,7 +24,7 @@ class LogController extends ActionController
     /**
      * @param Filter|null $filter
      *
-     * @ignorevalidation filter
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("filter")
      */
     public function filterAction(Filter $filter = null)
     {

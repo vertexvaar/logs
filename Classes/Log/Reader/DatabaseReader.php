@@ -5,6 +5,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Statement;
 use PDO;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VerteXVaaR\Logs\Domain\Model\Filter;
 use VerteXVaaR\Logs\Domain\Model\Log;
@@ -79,7 +80,7 @@ SQL
     protected function getWhereClausByFilter(Filter $filter): string
     {
         $where = [
-            'level <= ' . $filter->getLevel(),
+            'level <= "' . LogLevel::normalizeLevel($filter->getLevel()) . '"',
             'message IS NOT NULL',
         ];
         $requestId = $filter->getRequestId();

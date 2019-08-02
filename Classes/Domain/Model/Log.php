@@ -1,6 +1,8 @@
 <?php
 namespace VerteXVaaR\Logs\Domain\Model;
 
+use TYPO3\CMS\Core\Log\LogLevel;
+
 /**
  * Class Log
  */
@@ -116,6 +118,14 @@ class Log
     public function getLevel(): int
     {
         return $this->level;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReadableLevel(): string
+    {
+        return LogLevel::getInternalName($this->level);
     }
 
     /**

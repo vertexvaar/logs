@@ -37,7 +37,7 @@
 					<br />({log.timeMicro})
 				</td>
 				<td>{log.component}</td>
-				<td>{log.level}</td>
+				<td>{log.readableLevel}</td>
 				<td>{log.message}</td>
 				<f:if condition="{filter.showData}">
 					<td>{log.data -> f:debug(inline:'true')}</td>
