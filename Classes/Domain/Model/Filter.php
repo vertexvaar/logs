@@ -121,11 +121,11 @@ class Filter
     }
 
     /**
-     * @param int|null $fromTime
+     * @param int $fromTime
      */
-    public function setFromTime(int $fromTime = null)
+    public function setFromTime(int $fromTime = 0)
     {
-        $this->fromTime = (int)$fromTime;
+        $this->fromTime = $fromTime;
     }
 
     /**
@@ -137,11 +137,11 @@ class Filter
     }
 
     /**
-     * @param int|null $toTime
+     * @param int $toTime
      */
-    public function setToTime(int $toTime = null)
+    public function setToTime(int $toTime = 0)
     {
-        $this->toTime = (int)$toTime;
+        $this->toTime = $toTime;
     }
 
     /**
