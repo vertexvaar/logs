@@ -11,28 +11,37 @@ to contact me or create a pull request with your proposal ;)
 
 ## Basic Usage
 
-Relax and install via composer:
+### Install via composer
 
-CLI walkthrough:
+1) Install it via CLI:
 
 ```
 composer require vertexvaar/logs
 ```
 
-Activate cia CLI or Extension Manager.
+2) Activate via CLI
 
-Other way (EM):
+```
+./vendor/bin/typo3 extension:activate logs
+```
+Alternatively you can switch to the TYPO3 Extension Manager and activate it there
 
-You should really use composer, just sayin'. But you can still install the extensions via the TYPO3 extension manager.
+### Install via ExtensionManager
+
+You should really use composer, just sayin'.  ;-)
+
+But you can still install the extensions via the TER and the TYPO3 extension manager.
 Don't forget to activate it afterwards.
 
-Last way (DL):
+### Use a download
 
-If you don't want to do cool stuff with composer you can download this extension as ZIP.
+If you don't want to do cool stuff with composer, you can download this extension as ZIP.
 Quick links for downloads:
 
 * [Branch: master](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/master.zip)
 * [Tag: 1.1.0](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/1.1.0.zip)
+
+Unzip it in the extension directory and activate it via cli or the TYPO3 Extension Manager.
 
 ## In depth
 
@@ -48,16 +57,15 @@ destinations (tables, files, etc.)
 
 ## TYPO3 & PHP compatibility
 
-PHP 5.6 support has ended with the year 2018 and TYPO3 v7 LTS has ended also in that year. There is no point in supporting those two anymore.
-As of 2019 and version 2.0 of this extension it requires/supports PHP 7.0 and TYPO3 v8 / v9.
+The current major version 3.0 requires PHP 7.0 or higher and support TYPO3 version 9 and 10.
+
+For versions supporting older PHP and / or TYPO3 versions please use the previous tags. But keep in mind, that these are not actively supported and you should strongly consider upgrading your TYPO3 installation.
 
 ## TODO
 
 * Register as devlog
-* ~~Also read from sys_log (maybe some adapter thingy?)~~
 * Ensure log sources are processed only once
 * Identify and fix that one bug that sometimes won't delete a log entry
-* ~~Save the current filter in the user data so it still applies after reopening the module or deletion of an entry~~
 * Add a log writer filter (to deselect log readers/erasers) #4
 
 ## Found a bug? Feedback?
