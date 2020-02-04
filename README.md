@@ -1,5 +1,4 @@
-VerteXVaaR.Logs
-===============
+# VerteXVaaR.Logs
 
 ## Introduction
 
@@ -15,15 +14,16 @@ to contact me or create a pull request with your proposal ;)
 
 1) Install it via CLI:
 
-```
-composer require vertexvaar/logs
-```
+    ```bash
+    composer require vertexvaar/logs
+    ```
 
 2) Activate via CLI
 
-```
-./vendor/bin/typo3 extension:activate logs
-```
+    ```bash
+    ./vendor/bin/typo3 extension:activate logs
+    ```
+   
 Alternatively you can switch to the TYPO3 Extension Manager and activate it there
 
 ### Install via ExtensionManager
