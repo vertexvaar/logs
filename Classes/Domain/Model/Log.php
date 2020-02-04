@@ -125,7 +125,11 @@ class Log
      */
     public function getReadableLevel(): string
     {
-        return LogLevel::getInternalName($this->level);
+        if (method_exists(LogLevel::class, 'getInternalName')) {
+            return LogLevel::getInternalName($this->level);
+        }
+
+        return LogLevel::getName($this->level);
     }
 
     /**
