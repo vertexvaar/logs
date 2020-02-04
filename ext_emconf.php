@@ -10,10 +10,10 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Oliver Eglseder',
     'author_email' => 'php@vxvr.de',
     'author_company' => 'vxvr.de',
-    'version' => '3.0.0',
+    'version' => '3.0.1',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-10.0.99',
+            'typo3' => '9.5.0-10.2.99',
         ],
         'conflicts' => [],
         'suggests' => [],
