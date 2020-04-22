@@ -70,9 +70,9 @@ For versions supporting older PHP and / or TYPO3 versions please use the previou
 
 ## Found a bug? Feedback?
 
-Please report any bug or negative side effects, as well as your feedback here: [Issues](https://github.com/vertexvaar/VerteXVaaR.Logs/issues)
+Please report any bug or negative side effects, as well as your feedback here: [Issues](https://gitlab.com/co-stack.com/co-stack.com/typo3-extensions/logs/-/issues)
 
 ## Other stuff
 
-Copyright & Author: Oliver Eglseder <php@vxvr.de>
+Copyright & Author: Oliver Eglseder <oliver.eglseder@co-stack.com>
 License: GPL-2.0+
