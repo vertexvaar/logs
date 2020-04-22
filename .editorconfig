@@ -1,24 +1,12 @@
 root = true
-charset = utf-8
-trim_trailing_whitespace = true
 
 [*]
+charset = utf-8
+trim_trailing_whitespace = true
 end_of_line = lf
 insert_final_newline = true
 
-[*.css]
-indent_style = tab
-indent_size = 4
-
 [*.html]
-indent_style = tab
-indent_size = 4
-
-[*.scss]
-indent_style = space
-indent_size = 2
-
-[*.js]
 indent_style = tab
 indent_size = 4
 
@@ -28,7 +16,6 @@ indent_size = 4
 
 [composer.json]
 indent_style = space
-indent_size = 4
 
 [*.php]
 indent_style = space
@@ -38,23 +25,6 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[{*.yaml,*.yml,package.json}]
-indent_style = space
-indent_size = 2
-
-[*.t3s]
-indent_style = space
-indent_size = 2
-
 [*.xlf]
 indent_style = tab
 indent_size = 4
-
-[*.xml.dist]
-indent_style = tab
-indent_size = 4
-continuation_indent_size = 8
-
-[*.sql]
-indent_style = tab
-indent_size = 2
