@@ -1,11 +1,11 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Reader;
+namespace CoStack\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use VerteXVaaR\Logs\Domain\Model\Filter;
-use VerteXVaaR\Logs\Domain\Model\Log;
+use CoStack\Logs\Domain\Model\Filter;
+use CoStack\Logs\Domain\Model\Log;
 use function array_merge;
 use function array_slice;
 use function is_array;

@@ -1,8 +1,8 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Reader;
+namespace CoStack\Logs\Log\Reader;
 
-use VerteXVaaR\Logs\Domain\Model\Filter;
-use VerteXVaaR\Logs\Domain\Model\Log;
+use CoStack\Logs\Domain\Model\Filter;
+use CoStack\Logs\Domain\Model\Log;
 
 /**
  * Interface ReaderInterface

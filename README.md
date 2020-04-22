@@ -1,4 +1,4 @@
-# VerteXVaaR.Logs
+# CoStack.Logs
 
 ## Introduction
 
@@ -23,7 +23,7 @@ to contact me or create a pull request with your proposal ;)
     ```bash
     ./vendor/bin/typo3 extension:activate logs
     ```
-   
+
 Alternatively you can switch to the TYPO3 Extension Manager and activate it there
 
 ### Install via ExtensionManager

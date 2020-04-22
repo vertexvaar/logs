@@ -1,5 +1,5 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Reader;
+namespace CoStack\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

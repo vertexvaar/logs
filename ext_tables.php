@@ -9,7 +9,7 @@ call_user_func(
 
         if ($configuration['moduleConfig'] !== 'disable') {
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-                'VerteXVaaR.Logs',
+                'CoStack.Logs',
                 $configuration['moduleConfig'],
                 'logs',
                 '',

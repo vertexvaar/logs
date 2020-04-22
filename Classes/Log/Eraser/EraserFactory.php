@@ -1,5 +1,5 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Eraser;
+namespace CoStack\Logs\Log\Eraser;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

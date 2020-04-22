@@ -1,11 +1,11 @@
 {
-    "name": "vertexvaar/logs",
+    "name": "co-stack/logs",
     "type": "typo3-cms-extension",
     "description": "TYPO3 Logging API reading module and devlog extension in one",
     "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
-            "VerteXVaaR\\Logs\\": "Classes/"
+            "CoStack\\Logs\\": "Classes/"
         }
     },
     "require": {

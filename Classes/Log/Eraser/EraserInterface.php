@@ -1,7 +1,7 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Eraser;
+namespace CoStack\Logs\Log\Eraser;
 
-use VerteXVaaR\Logs\Domain\Model\Log;
+use CoStack\Logs\Domain\Model\Log;
 
 /**
  * Interface EraserInterface

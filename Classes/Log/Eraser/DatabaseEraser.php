@@ -1,10 +1,10 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Eraser;
+namespace CoStack\Logs\Log\Eraser;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use VerteXVaaR\Logs\Domain\Model\Log;
+use CoStack\Logs\Domain\Model\Log;
 
 /**
  * Class DatabaseEraser

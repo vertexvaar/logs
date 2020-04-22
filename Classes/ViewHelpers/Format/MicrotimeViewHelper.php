@@ -1,5 +1,5 @@
 <?php
-namespace VerteXVaaR\Logs\ViewHelpers\Format;
+namespace CoStack\Logs\ViewHelpers\Format;
 
 use Closure;
 use DateTime;

@@ -1,5 +1,5 @@
 <?php
-namespace VerteXVaaR\Logs\Log\Reader;
+namespace CoStack\Logs\Log\Reader;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Statement;
@@ -7,8 +7,8 @@ use PDO;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use VerteXVaaR\Logs\Domain\Model\Filter;
-use VerteXVaaR\Logs\Domain\Model\Log;
+use CoStack\Logs\Domain\Model\Filter;
+use CoStack\Logs\Domain\Model\Log;
 use function implode;
 use function json_decode;
 use function strlen;

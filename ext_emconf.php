@@ -1,6 +1,6 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'VXVR Logs',
+    'title' => 'co-stack.com Logs',
     'description' => 'Sophisticated Log Reader API with a backend module to red, filter and delete logs from the TYPO3 Logging API',
     'category' => 'module',
     'state' => 'stable',
@@ -8,7 +8,7 @@ $EM_CONF[$_EXTKEY] = [
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
     'author' => 'Oliver Eglseder',
-    'author_email' => 'php@vxvr.de',
+    'author_email' => 'oliver.eglseder@co-stack.com',
     'author_company' => 'vxvr.de',
     'version' => '3.0.1',
     'constraints' => [

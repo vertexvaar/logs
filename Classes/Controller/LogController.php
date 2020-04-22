@@ -1,14 +1,14 @@
 <?php
-namespace VerteXVaaR\Logs\Controller;
+namespace CoStack\Logs\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
-use VerteXVaaR\Logs\Domain\Model\Filter;
-use VerteXVaaR\Logs\Domain\Model\Log;
-use VerteXVaaR\Logs\Log\Eraser\ConjunctionEraser;
-use VerteXVaaR\Logs\Log\Reader\ConjunctionReader;
+use CoStack\Logs\Domain\Model\Filter;
+use CoStack\Logs\Domain\Model\Log;
+use CoStack\Logs\Log\Eraser\ConjunctionEraser;
+use CoStack\Logs\Log\Reader\ConjunctionReader;
 
 /**
  * Class LogController
