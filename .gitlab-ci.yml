@@ -42,3 +42,9 @@ test:phpmd:
   image: in2code/phpmd:7.2
   script:
     - phpmd Classes ansi .phpmd.xml
+
+test:lint:typoscript:
+  stage: test
+  image: in2code/typo3-typoscript-lint:7.2
+  script:
+    - typoscript-lint -c .typoscript-lint.yml

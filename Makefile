@@ -26,7 +26,7 @@ qa-all: qa-lint-all qa-code-sniffer qa-mess-detector
 	echo "$(EMOJI_thumbsup) All clear"
 
 ## Lint all languages
-qa-lint-all: qa-lint-composer qa-lint-php-all
+qa-lint-all: qa-lint-composer qa-lint-typoscript qa-lint-php-all
 
 ## Validate the composer.json schema
 qa-lint-composer:
@@ -54,6 +54,10 @@ qa-lint-php-7.3:
 qa-lint-php-7.4:
 	echo "$(EMOJI_digit_seven)$(EMOJI_digit_four) $(EMOJI_elephant) PHP lint 7.4"
 	docker run --rm -it -u1000:1000 -v "$$PWD":/app in2code/php-parallel-lint:7.4 parallel-lint Classes/
+
+## TYPO3 typoscript lint
+qa-lint-typoscript:
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app in2code/typo3-typoscript-lint:7.2 typoscript-lint -c .typoscript-lint.yml
 
 ## PHP code sniffer
 qa-code-sniffer:
