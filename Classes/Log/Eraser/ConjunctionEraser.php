@@ -16,6 +16,8 @@ class ConjunctionEraser implements EraserInterface
     protected $eraser = [];
 
     /**
+     * @param array $configuration
+     *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __construct(array $configuration = null)
