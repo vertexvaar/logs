@@ -29,7 +29,6 @@ For versions supporting older PHP and / or TYPO3 versions please use the previou
 ## TODO
 
 * Register as devlog
-* Ensure log sources are processed only once
 * Identify and fix that one bug that sometimes won't delete a log entry
 * Add a log writer filter (to deselect log readers/erasers) #4
 
