@@ -17,14 +17,14 @@ Backend module created - problem solved!
 
 The ConjunctionReader creates an instance of `Reader` for each `Writer`,
 which reads from the specific location where the writer writes the log
-entries. Therefore it's possible to read and filter logs accross all log
+entries. Therefore, it's possible to read and filter logs across all log
 destinations (tables, files, etc.)
 
 ## TYPO3 & PHP compatibility
 
 The current major version 3.0 requires PHP 7.0 or higher and support TYPO3 version 9 and 10.
 
-For versions supporting older PHP and / or TYPO3 versions please use the previous tags. But keep in mind, that these are not actively supported and you should strongly consider upgrading your TYPO3 installation.
+For versions supporting older PHP and / or TYPO3 versions please use the previous tags. Keep in mind, that these are not actively supported, and you should strongly consider upgrading your TYPO3 installation.
 
 ## TODO
 
