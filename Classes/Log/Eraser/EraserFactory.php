@@ -13,10 +13,7 @@ use function is_array;
  */
 class EraserFactory
 {
-    /**
-     * @var array
-     */
-    protected static $writerEraserMapping = [
+    protected const WRITER_ERASER_MAPPING = [
         DatabaseWriter::class => DatabaseEraser::class,
     ];
 
@@ -41,8 +38,8 @@ class EraserFactory
                     foreach ($value as $writer) {
                         if (is_array($writer)) {
                             foreach ($writer as $class => $writerConfiguration) {
-                                if (isset(static::$writerEraserMapping[$class])) {
-                                    $eraserClass = static::$writerEraserMapping[$class];
+                                if (isset(static::WRITER_ERASER_MAPPING[$class])) {
+                                    $eraserClass = static::WRITER_ERASER_MAPPING[$class];
                                     $logReader[] = GeneralUtility::makeInstance($eraserClass, $writerConfiguration);
                                 }
                             }
