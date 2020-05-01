@@ -5,8 +5,14 @@
 			<trans-unit id="module_config">
 				<source>Select where the module should be shown</source>
 			</trans-unit>
-			<trans-unit id="module_config.disable">
+			<trans-unit id="module_disabled">
 				<source>Do not activate the module (API only)</source>
+			</trans-unit>
+			<trans-unit id="module_tools">
+				<source>Admin tools</source>
+			</trans-unit>
+			<trans-unit id="module_system">
+				<source>System</source>
 			</trans-unit>
 		</body>
 	</file>

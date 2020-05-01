@@ -1,2 +1,2 @@
-# cat=basic; type=options[LLL:EXT:lang/Resources/Private/Language/locallang_mod_admintools.xlf:mlang_tabs_tab=tools,LLL:EXT:lang/Resources/Private/Language/locallang_mod_system.xlf:mlang_tabs_tab=system,LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_config.disable=disable]; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_config
+# cat=basic; type=options[LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_tools=tools, LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_system=system, LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_disabled=disable]; label=LLL:EXT:logs/Resources/Private/Language/locallang.ext_conf.xlf:module_config
 moduleConfig = tools
