@@ -6,19 +6,18 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
+use function array_keys;
 use function get_object_vars;
+use function in_array;
+use function ucfirst;
 
 /**
  * Class Filter
  */
 class Filter
 {
-    const SORTING_DESC = 'DESC';
-    const SORTING_ASC = 'ASC';
-    const ORDER_TIME_MICRO = 'time_micro';
-    const ORDER_REQUEST_ID = 'request_id';
-    const ORDER_COMPONENT = 'component';
-    const ORDER_LEVEL = 'level';
+    public const SORTING_DESC = 'DESC';
+    public const SORTING_ASC = 'ASC';
 
     /**
      * @var string
@@ -63,7 +62,7 @@ class Filter
     /**
      * @var string
      */
-    protected $orderField = self::ORDER_TIME_MICRO;
+    protected $orderField = Log::FIELD_TIME_MICRO;
 
     /**
      * @var string
@@ -117,7 +116,7 @@ class Filter
     /**
      * @return int
      */
-    public function getFromTime(): int
+    public function getFromTime(): ?int
     {
         return $this->fromTime;
     }
@@ -125,7 +124,7 @@ class Filter
     /**
      * @param int $fromTime
      */
-    public function setFromTime(int $fromTime = 0)
+    public function setFromTime(int $fromTime = null)
     {
         $this->fromTime = $fromTime;
     }
@@ -133,7 +132,7 @@ class Filter
     /**
      * @return int
      */
-    public function getToTime(): int
+    public function getToTime(): ?int
     {
         return $this->toTime;
     }
@@ -141,7 +140,7 @@ class Filter
     /**
      * @param int $toTime
      */
-    public function setToTime(int $toTime = 0)
+    public function setToTime(int $toTime = null)
     {
         $this->toTime = $toTime;
     }
@@ -223,7 +222,9 @@ class Filter
      */
     public function setOrderField(string $orderField)
     {
-        $this->orderField = $orderField;
+        if (in_array($orderField, array_keys($this->getOrderFields()))) {
+            $this->orderField = $orderField;
+        }
     }
 
     /**
@@ -265,10 +266,10 @@ class Filter
     public function getOrderFields(): array
     {
         return [
-            static::ORDER_TIME_MICRO => LocalizationUtility::translate('filter.time_micro', 'logs'),
-            static::ORDER_REQUEST_ID => LocalizationUtility::translate('filter.request_id', 'logs'),
-            static::ORDER_COMPONENT => LocalizationUtility::translate('filter.component', 'logs'),
-            static::ORDER_LEVEL => LocalizationUtility::translate('filter.level', 'logs'),
+            Log::FIELD_TIME_MICRO => LocalizationUtility::translate('filter.time_micro', 'logs'),
+            Log::FIELD_REQUEST_ID => LocalizationUtility::translate('filter.request_id', 'logs'),
+            Log::FIELD_COMPONENT => LocalizationUtility::translate('filter.component', 'logs'),
+            Log::FIELD_LEVEL => LocalizationUtility::translate('filter.level', 'logs'),
         ];
     }
 
@@ -299,7 +300,7 @@ class Filter
         $filter = $this->getBackendUser()->getSessionData('tx_logs_filter');
         if ($filter instanceof Filter) {
             foreach (get_object_vars($filter) as $name => $value) {
-                $this->{$name} = $value;
+                $this->{'set' . ucfirst($name)} = $value;
             }
         }
     }

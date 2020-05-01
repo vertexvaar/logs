@@ -4,7 +4,6 @@ namespace CoStack\Logs\Log\Reader;
 
 use CoStack\Logs\Domain\Model\Filter;
 use CoStack\Logs\Domain\Model\Log;
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Statement;
 use PDO;
 use TYPO3\CMS\Core\Database\Connection;
@@ -12,7 +11,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-use function implode;
+use function array_map;
 use function json_decode;
 use function strlen;
 use function substr;
@@ -64,74 +63,63 @@ class DatabaseReader implements ReaderInterface
      * @param Filter $filter
      *
      * @return Log[]
-     * @throws DBALException
      */
     public function findByFilter(Filter $filter): array
     {
-        $fields = $this->getSelectFieldsByFilter($filter);
-        $constraints = $this->getWhereClausByFilter($filter);
-        $orderField = $filter->getOrderField();
-        $orderDirection = $filter->getOrderDirection();
-        $limit = $filter->getLimit();
-        $statement = $this->connection->query(
-            <<<SQL
-            SELECT {$fields}
-            FROM {$this->table}
-            WHERE {$constraints}
-            ORDER BY {$orderField} {$orderDirection}
-            LIMIT {$limit}
-SQL
-        );
-        return $this->fetchLogsByStatement($statement);
-    }
+        $query = $this->connection->createQueryBuilder();
+        $query->getRestrictions()->removeAll();
 
-    /**
-     * @param Filter $filter
-     *
-     * @return string
-     */
-    protected function getWhereClausByFilter(Filter $filter): string
-    {
-        $where = [
-            'level <= "' . LogLevel::normalizeLevel($filter->getLevel()) . '"',
-            'message IS NOT NULL',
-        ];
+        $quote = function (string $field) use ($query): string {
+            return $query->quoteIdentifier($field);
+        };
+        $selectFields = array_map($quote, $this->selectFields);
+
+        if (!$filter->isFullMessage()) {
+            $selectFields[4] = 'CONCAT(LEFT(' . $selectFields[4] . ' , 120), "...") as message';
+        }
+        if (!$filter->isShowData()) {
+            $selectFields[5] = '"- {}"';
+        }
+        $query->selectLiteral(...$selectFields);
+
+        $query->from($this->table);
+
+        $logLevel = LogLevel::normalizeLevel($filter->getLevel());
+        $query->where($query->expr()->lte(Log::FIELD_LEVEL, $query->createNamedParameter($logLevel, PDO::PARAM_INT)));
+        $query->andWhere($query->expr()->isNotNull(Log::FIELD_MESSAGE));
+
         $requestId = $filter->getRequestId();
         if (!empty($requestId)) {
-            /* @see \TYPO3\CMS\Core\Core\Bootstrap::__construct for requestId string length */
+            /* @see \TYPO3\CMS\Core\Core\Bootstrap::init for requestId string length */
             if (13 === strlen($requestId)) {
-                $where[] = Filter::ORDER_REQUEST_ID . ' = ' . $this->quoteString($requestId);
+                $constraint = $query->expr()->eq(Log::FIELD_REQUEST_ID, $query->createNamedParameter($requestId));
             } else {
-                $where[] = Filter::ORDER_REQUEST_ID . ' LIKE ' . $this->quoteString("%$requestId%");
+                $constraint = $query->expr()->like(Log::FIELD_REQUEST_ID, $query->createNamedParameter("%$requestId%"));
             }
+            $query->andWhere($constraint);
         }
         $fromTime = $filter->getFromTime();
         if (!empty($fromTime)) {
-            $where[] = Filter::ORDER_TIME_MICRO . ' >= ' . $this->quoteString($fromTime);
+            $query->andWhere($query->expr()->gte(Log::FIELD_TIME_MICRO, $query->createNamedParameter($fromTime)));
         }
         $toTime = $filter->getToTime();
         if (!empty($toTime)) {
             // Add +1 to the timestamp to ignore additional microseconds when comparing. UX stuff, you know ;)
-            $where[] = Filter::ORDER_TIME_MICRO . ' <= ' . $this->quoteString($toTime + 1);
+            $query->andWhere($query->expr()->lte(Log::FIELD_TIME_MICRO, $query->createNamedParameter($toTime + 1)));
         }
         $component = $filter->getComponent();
         if (!empty($component)) {
-            $where[] = Filter::ORDER_COMPONENT . ' LIKE ' . $this->quoteString("%$component%");
+            $query->andWhere($query->expr()->like(Log::FIELD_COMPONENT, $query->createNamedParameter("%$component%")));
         }
-        return implode(' AND ', $where);
-    }
 
-    /**
-     * @param Filter $filter
-     *
-     * @return string
-     */
-    protected function getSelectFieldsByFilter(Filter $filter): string
-    {
-        $selectFields = $this->selectFields;
-        $filter->isFullMessage() ?: $selectFields[4] = 'CONCAT(LEFT(message , 120), "...") as message';
-        $filter->isShowData() ?: $selectFields[5] = '"- {}"';
-        return implode(',', $selectFields);
+        $query->orderBy($filter->getOrderField(), $filter->getOrderDirection());
+        $limit = $filter->getLimit();
+        if ($limit > 0) {
+            $query->setMaxResults($limit);
+        }
+        $statement = $query->execute();
+
+        return $this->fetchLogsByStatement($statement);
     }
 
     /**
@@ -144,7 +132,7 @@ SQL
         $logs = [];
 
         $statement->setFetchMode(PDO::FETCH_NUM);
-        if ($statement->execute()) {
+        if (0 === $statement->errorCode()) {
             while (($row = $statement->fetch())) {
                 $row[5] = json_decode(substr($row[5], 2), true);
                 if (empty($row[5])) {
@@ -163,15 +151,5 @@ SQL
             return $logs;
         }
         return $logs;
-    }
-
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
-    protected function quoteString(string $string): string
-    {
-        return $this->connection->quote($string);
     }
 }

@@ -9,6 +9,13 @@ use TYPO3\CMS\Core\Log\LogLevel;
  */
 class Log
 {
+    public const FIELD_REQUEST_ID = 'request_id';
+    public const FIELD_TIME_MICRO = 'time_micro';
+    public const FIELD_COMPONENT = 'component';
+    public const FIELD_LEVEL = 'level';
+    public const FIELD_MESSAGE = 'message';
+    public const FIELD_DATA = 'data';
+
     /**
      * @var string
      */
@@ -126,10 +133,6 @@ class Log
      */
     public function getReadableLevel(): string
     {
-        if (method_exists(LogLevel::class, 'getInternalName')) {
-            return LogLevel::getInternalName($this->level);
-        }
-
         return LogLevel::getName($this->level);
     }
 
