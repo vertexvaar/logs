@@ -1,10 +1,11 @@
 <?php
+
 namespace CoStack\Logs\Log\Eraser;
 
+use CoStack\Logs\Domain\Model\Log;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use CoStack\Logs\Domain\Model\Log;
 
 /**
  * Class DatabaseEraser
@@ -43,6 +44,7 @@ class DatabaseEraser implements EraserInterface
 
     /**
      * @param Log $log
+     *
      * @return array
      */
     protected function getWhere(Log $log): array
@@ -66,6 +68,7 @@ class DatabaseEraser implements EraserInterface
 
     /**
      * @param Log $log
+     *
      * @return array
      */
     protected function getWhereAlike(Log $log): array

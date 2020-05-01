@@ -1,8 +1,9 @@
 <?php
+
 namespace CoStack\Logs\Log\Eraser;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use CoStack\Logs\Domain\Model\Log;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class ConjunctionEraser

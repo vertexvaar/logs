@@ -1,11 +1,13 @@
 <?php
+
 namespace CoStack\Logs\Log\Reader;
 
+use CoStack\Logs\Domain\Model\Filter;
+use CoStack\Logs\Domain\Model\Log;
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use CoStack\Logs\Domain\Model\Filter;
-use CoStack\Logs\Domain\Model\Log;
+
 use function array_merge;
 use function array_slice;
 use function is_array;
@@ -37,6 +39,7 @@ class ConjunctionReader implements ReaderInterface
 
     /**
      * @param Filter $filter
+     *
      * @return Log[]
      */
     public function findByFilter(Filter $filter): array
@@ -96,6 +99,7 @@ class ConjunctionReader implements ReaderInterface
 
     /**
      * @param array|null $logConfiguration
+     *
      * @return array
      */
     protected function getReadersForWriters(array $logConfiguration = null): array

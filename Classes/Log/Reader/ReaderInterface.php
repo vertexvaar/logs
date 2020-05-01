@@ -1,4 +1,5 @@
 <?php
+
 namespace CoStack\Logs\Log\Reader;
 
 use CoStack\Logs\Domain\Model\Filter;
@@ -18,6 +19,7 @@ interface ReaderInterface
 
     /**
      * @param Filter $filter
+     *
      * @return Log[]
      */
     public function findByFilter(Filter $filter): array;

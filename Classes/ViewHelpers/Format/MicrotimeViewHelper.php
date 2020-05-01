@@ -1,10 +1,12 @@
 <?php
+
 namespace CoStack\Logs\ViewHelpers\Format;
 
 use Closure;
 use DateTime;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 use function strpos;
 
 /**
@@ -42,6 +44,7 @@ class MicrotimeViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
+     *
      * @return string
      */
     public static function renderStatic(

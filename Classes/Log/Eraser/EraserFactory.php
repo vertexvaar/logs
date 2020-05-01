@@ -1,8 +1,10 @@
 <?php
+
 namespace CoStack\Logs\Log\Eraser;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 use function array_merge;
 use function is_array;
 
@@ -21,6 +23,7 @@ class EraserFactory
     /**
      * @param array|null $logConfiguration Omit if you want all erasers for all configured writers or pass your writer
      *     configuration if you want only the erasers for the given writers
+     *
      * @return array
      */
     public function getErasersForWriters(array $logConfiguration = null): array

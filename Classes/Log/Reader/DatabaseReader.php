@@ -1,14 +1,17 @@
 <?php
+
 namespace CoStack\Logs\Log\Reader;
 
+use CoStack\Logs\Domain\Model\Filter;
+use CoStack\Logs\Domain\Model\Log;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Statement;
 use PDO;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use CoStack\Logs\Domain\Model\Filter;
-use CoStack\Logs\Domain\Model\Log;
+
 use function implode;
 use function json_decode;
 use function strlen;
@@ -30,7 +33,7 @@ class DatabaseReader implements ReaderInterface
     protected $table = '';
 
     /**
-     * @var \TYPO3\CMS\Core\Database\Connection|null
+     * @var Connection|null
      */
     protected $connection = null;
 
@@ -51,6 +54,7 @@ class DatabaseReader implements ReaderInterface
 
     /**
      * @param Filter $filter
+     *
      * @return Log[]
      * @throws DBALException
      */
@@ -75,6 +79,7 @@ SQL
 
     /**
      * @param Filter $filter
+     *
      * @return string
      */
     protected function getWhereClausByFilter(Filter $filter): string
@@ -110,6 +115,7 @@ SQL
 
     /**
      * @param Filter $filter
+     *
      * @return string
      */
     protected function getSelectFieldsByFilter(Filter $filter): string
@@ -122,6 +128,7 @@ SQL
 
     /**
      * @param Statement $statement
+     *
      * @return Log[]
      */
     protected function fetchLogsByStatement(Statement $statement): array
@@ -152,6 +159,7 @@ SQL
 
     /**
      * @param string $string
+     *
      * @return string
      */
     protected function quoteString(string $string): string

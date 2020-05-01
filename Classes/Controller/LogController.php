@@ -1,14 +1,15 @@
 <?php
+
 namespace CoStack\Logs\Controller;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use CoStack\Logs\Domain\Model\Filter;
 use CoStack\Logs\Domain\Model\Log;
 use CoStack\Logs\Log\Eraser\ConjunctionEraser;
 use CoStack\Logs\Log\Reader\ConjunctionReader;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 
 /**
  * Class LogController

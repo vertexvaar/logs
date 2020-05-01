@@ -1,8 +1,10 @@
 <?php
+
 namespace CoStack\Logs\Log\Reader;
 
 use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 use function array_merge;
 use function is_array;
 
@@ -21,6 +23,7 @@ class ReaderFactory
     /**
      * @param array|null $logConfiguration Omit if you want all readers for all configured writers or pass your writer
      *     configuration if you want only the reader for the given writers
+     *
      * @return array
      */
     public function getReadersForWriters(array $logConfiguration = null)

@@ -1,4 +1,5 @@
 <?php
+
 namespace CoStack\Logs\Domain\Model;
 
 use TYPO3\CMS\Core\Log\LogLevel;
