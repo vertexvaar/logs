@@ -2,48 +2,13 @@
 
 ## Introduction
 
-Finally a backend module to read from the TYPO3 logging API.
+Finally, a backend module to read from the TYPO3 logging API.
 
-Notice: Currently only log tables are supported for reading.
+Notice: This extension currently supports just log tables.
 If you need a special log reader (e.g. file or syslog) feel free
 to contact me or create a pull request with your proposal ;)
 
 ## Basic Usage
-
-### Install via composer
-
-1) Install it via CLI:
-
-    ```bash
-    composer require vertexvaar/logs
-    ```
-
-2) Activate via CLI
-
-    ```bash
-    ./vendor/bin/typo3 extension:activate logs
-    ```
-
-Alternatively you can switch to the TYPO3 Extension Manager and activate it there
-
-### Install via ExtensionManager
-
-You should really use composer, just sayin'.  ;-)
-
-But you can still install the extensions via the TER and the TYPO3 extension manager.
-Don't forget to activate it afterwards.
-
-### Use a download
-
-If you don't want to do cool stuff with composer, you can download this extension as ZIP.
-Quick links for downloads:
-
-* [Branch: master](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/master.zip)
-* [Tag: 1.1.0](https://github.com/vertexvaar/VerteXVaaR.Logs/archive/1.1.0.zip)
-
-Unzip it in the extension directory and activate it via cli or the TYPO3 Extension Manager.
-
-## In depth
 
 The logging API exists for a long time, but there is no nice way to read
 those logs if the user has no direct access to the database or files.
