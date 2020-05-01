@@ -2,14 +2,11 @@
 
 namespace CoStack\Logs\Domain\Model;
 
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 use function array_keys;
-use function get_object_vars;
 use function in_array;
-use function ucfirst;
 
 /**
  * Class Filter
@@ -68,18 +65,6 @@ class Filter
      * @var string
      */
     protected $orderDirection = self::SORTING_DESC;
-
-    /**
-     * Filter constructor.
-     *
-     * @param bool $loadFromSession
-     */
-    public function __construct(bool $loadFromSession = true)
-    {
-        if (true === $loadFromSession) {
-            $this->loadFromSession();
-        }
-    }
 
     /**
      * @return string
@@ -282,36 +267,5 @@ class Filter
             static::SORTING_DESC => LocalizationUtility::translate('filter.desc', 'logs'),
             static::SORTING_ASC => LocalizationUtility::translate('filter.asc', 'logs'),
         ];
-    }
-
-    /**
-     *
-     */
-    public function saveToSession()
-    {
-        $this->getBackendUser()->setAndSaveSessionData('tx_logs_filter', $this);
-    }
-
-    /**
-     *
-     */
-    public function loadFromSession()
-    {
-        $filter = $this->getBackendUser()->getSessionData('tx_logs_filter');
-        if ($filter instanceof Filter) {
-            foreach (get_object_vars($filter) as $name => $value) {
-                $this->{'set' . ucfirst($name)} = $value;
-            }
-        }
-    }
-
-    /**
-     * @return BackendUserAuthentication
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function getBackendUser(): BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
     }
 }

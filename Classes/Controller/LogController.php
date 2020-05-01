@@ -6,8 +6,11 @@ use CoStack\Logs\Domain\Model\Filter;
 use CoStack\Logs\Domain\Model\Log;
 use CoStack\Logs\Log\Eraser\ConjunctionEraser;
 use CoStack\Logs\Log\Reader\ConjunctionReader;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException;
+use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 
@@ -23,18 +26,29 @@ class LogController extends ActionController
     protected $logConfiguration = null;
 
     /**
+     * @throws InvalidArgumentNameException
+     * @throws NoSuchArgumentException
+     */
+    protected function initializeFilterAction()
+    {
+        if ($this->request->hasArgument('filter')) {
+            $filter = $this->request->getArgument('filter');
+            $this->getBackendUser()->setAndSaveSessionData('tx_logs_filter', $filter);
+        } else {
+            $filter = $this->getBackendUser()->getSessionData('tx_logs_filter');
+            if (null !== $filter) {
+                $this->request->setArgument('filter', $filter);
+            }
+        }
+    }
+
+    /**
      * @param Filter|null $filter
      *
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("filter")
      */
     public function filterAction(Filter $filter = null)
     {
-        if (null !== $filter) {
-            $filter->saveToSession();
-        } else {
-            $filter = GeneralUtility::makeInstance(Filter::class);
-        }
-
         $reader = GeneralUtility::makeInstance(ConjunctionReader::class, $this->logConfiguration);
         $logs = $reader->findByFilter($filter);
 
@@ -74,5 +88,15 @@ class LogController extends ActionController
         $conjunctionReader = GeneralUtility::makeInstance(ConjunctionEraser::class, $this->logConfiguration);
         $conjunctionReader->deleteAlike($log);
         $this->redirect('filter');
+    }
+
+    /**
+     * @return BackendUserAuthentication
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    protected function getBackendUser(): BackendUserAuthentication
+    {
+        return $GLOBALS['BE_USER'];
     }
 }
