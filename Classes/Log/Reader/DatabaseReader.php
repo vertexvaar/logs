@@ -53,6 +53,14 @@ class DatabaseReader implements ReaderInterface
     }
 
     /**
+     * @return string[]
+     */
+    public static function getUniqueConfigKeys(): array
+    {
+        return ['logTable'];
+    }
+
+    /**
      * @param Filter $filter
      *
      * @return Log[]

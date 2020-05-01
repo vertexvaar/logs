@@ -38,6 +38,14 @@ class ConjunctionReader implements ReaderInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getUniqueConfigKeys(): array
+    {
+        return [];
+    }
+
+    /**
      * @param Filter $filter
      *
      * @return Log[]
