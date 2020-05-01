@@ -1,0 +1,44 @@
+stages:
+  - test
+
+test:lint:composer:
+  stage: test
+  image: in2code/php:7.0-fpm
+  script:
+    - composer validate --strict
+
+test:lint:php-7.1:
+  stage: test
+  image: in2code/php-parallel-lint:7.1
+  script:
+    - parallel-lint Classes/
+
+test:lint:php-7.2:
+  stage: test
+  image: in2code/php-parallel-lint:7.2
+  script:
+    - parallel-lint Classes/
+
+test:lint:php-7.3:
+  stage: test
+  image: in2code/php-parallel-lint:7.3
+  script:
+    - parallel-lint Classes/
+
+test:lint:php-7.4:
+  stage: test
+  image: in2code/php-parallel-lint:7.4
+  script:
+    - parallel-lint Classes/
+
+test:phpcs:
+  stage: test
+  image: in2code/phpcs:7.2
+  script:
+    - phpcs
+
+test:phpmd:
+  stage: test
+  image: in2code/phpmd:7.2
+  script:
+    - phpmd Classes ansi .phpmd.xml

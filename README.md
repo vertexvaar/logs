@@ -1,5 +1,7 @@
 # CoStack.Logs
 
+[![pipeline status](https://gitlab.com/co-stack.com/co-stack.com/typo3-extensions/logs/badges/master/pipeline.svg)](https://gitlab.com/co-stack.com/co-stack.com/typo3-extensions/logs/pipelines)
+
 ## Introduction
 
 Finally, a backend module to read from the TYPO3 logging API.

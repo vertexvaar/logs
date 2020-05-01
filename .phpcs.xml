@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="EXT:logs PHPCS ruleset"
+         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd"
+>
+    <description>Test Classes and Tests. Config optimized for local CLO and CI/CD.</description>
+
+    <rule ref="PSR12"/>
+
+    <file>Classes/</file>
+
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+    <arg value="nps"/>
+</ruleset>
