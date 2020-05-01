@@ -4,13 +4,11 @@ namespace CoStack\Logs\Log\Reader;
 
 use CoStack\Logs\Domain\Model\Filter;
 use CoStack\Logs\Domain\Model\Log;
-use TYPO3\CMS\Core\Log\Writer\DatabaseWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 use function array_merge;
 use function array_slice;
-use function is_array;
 use function strcmp;
 use function usort;
 
@@ -20,17 +18,15 @@ use function usort;
 class ConjunctionReader implements ReaderInterface
 {
     /**
-     * @var array
-     */
-    protected static $writerReaderMapping = [
-        DatabaseWriter::class => DatabaseReader::class,
-    ];
-
-    /**
      * @var ReaderInterface[]
      */
     protected $readers = [];
 
+    /**
+     * ConjunctionReader constructor.
+     *
+     * @param array|null $configuration
+     */
     public function __construct(array $configuration = null)
     {
         $readerFactory = GeneralUtility::makeInstance(ReaderFactory::class);
@@ -103,48 +99,5 @@ class ConjunctionReader implements ReaderInterface
     public function addReader(ReaderInterface $reader)
     {
         $this->readers[] = $reader;
-    }
-
-    /**
-     * @param array|null $logConfiguration
-     *
-     * @return array
-     */
-    protected function getReadersForWriters(array $logConfiguration = null): array
-    {
-        if (null === $logConfiguration) {
-            $logConfiguration = $this->getLogConfiguration();
-        }
-
-        $logReader = [];
-        foreach ($logConfiguration as $key => $value) {
-            if (is_array($value)) {
-                if ('writerConfiguration' !== $key) {
-                    $logReader = array_merge($logReader, $this->getReadersForWriters($value));
-                } else {
-                    foreach ($value as $writer) {
-                        if (is_array($writer)) {
-                            foreach ($writer as $class => $writerConfiguration) {
-                                if (isset(static::$writerReaderMapping[$class])) {
-                                    $readerClass = static::$writerReaderMapping[$class];
-                                    $logReader[] = new $readerClass($writerConfiguration);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return $logReader;
-    }
-
-    /**
-     * @return array
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function getLogConfiguration(): array
-    {
-        return $GLOBALS['TYPO3_CONF_VARS']['LOG'];
     }
 }
