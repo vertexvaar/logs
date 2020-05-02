@@ -24,7 +24,7 @@ destinations (tables, files, etc.)
 
 ## TYPO3 & PHP compatibility
 
-The current major version 3.0 requires PHP 7.0 or higher and support TYPO3 version 9 and 10.
+The current major version 3.1 requires PHP 7.1 or higher and support TYPO3 version 9 and 10.
 
 For versions supporting older PHP and / or TYPO3 versions please use the previous tags. Keep in mind, that these are not actively supported, and you should strongly consider upgrading your TYPO3 installation.
 
