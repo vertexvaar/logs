@@ -49,6 +49,9 @@ class LogController extends ActionController
      */
     public function filterAction(Filter $filter = null)
     {
+        if (null === $filter) {
+            $filter = GeneralUtility::makeInstance(Filter::class);
+        }
         $reader = GeneralUtility::makeInstance(ConjunctionReader::class, $this->logConfiguration);
         $logs = $reader->findByFilter($filter);
 
