@@ -38,6 +38,7 @@ class LogController extends ActionController
             $filter = $this->getBackendUser()->getSessionData('tx_logs_filter');
             if (null !== $filter) {
                 $this->request->setArgument('filter', $filter);
+                $this->arguments->getArgument('filter')->getPropertyMappingConfiguration()->allowAllProperties();
             }
         }
     }
