@@ -15,9 +15,6 @@ use function strpos;
  */
 class MicrotimeViewHelper extends AbstractViewHelper
 {
-    /**
-     *
-     */
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -52,15 +49,15 @@ class MicrotimeViewHelper extends AbstractViewHelper
         Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
-        $microTime = $arguments['microTime'];
+        $microTime = (string)$arguments['microTime'];
         $format = $arguments['format'];
 
         if (false !== strpos($microTime, '.')) {
             $dateTime = DateTime::createFromFormat('U.u', $microTime);
-        } elseif (false !== strpos(' ', $microTime)) {
+        } elseif (false !== strpos($microTime, ' ')) {
             $dateTime = DateTime::createFromFormat('u U', $microTime);
         } else {
-            $dateTime = DateTime::createFromFormat('U', (int)$microTime);
+            $dateTime = DateTime::createFromFormat('U', $microTime);
         }
 
         return $dateTime->format($format);
