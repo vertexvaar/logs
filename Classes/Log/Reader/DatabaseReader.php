@@ -132,7 +132,7 @@ class DatabaseReader implements ReaderInterface
         $logs = [];
 
         $statement->setFetchMode(PDO::FETCH_NUM);
-        if (0 === $statement->errorCode()) {
+        if (0 === (int)$statement->errorCode()) {
             while (($row = $statement->fetch())) {
                 $row[5] = json_decode(substr($row[5], 2), true);
                 if (empty($row[5])) {
