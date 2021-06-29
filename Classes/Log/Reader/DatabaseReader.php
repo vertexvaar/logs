@@ -54,9 +54,9 @@ class DatabaseReader implements ReaderInterface
     /**
      * @return string[]
      */
-    public static function getUniqueConfigKeys(): array
+    public static function getDefaultConfigForUniqueKeys(): array
     {
-        return ['logTable'];
+        return ['logTable' => 'sys_log'];
     }
 
     /**

@@ -82,8 +82,8 @@ class ReaderFactory
         /** @var ReaderInterface $readerClass */
         $readerClass = static::WRITER_READER_MAPPING[$class];
         $configValues = [];
-        foreach ($readerClass::getUniqueConfigKeys() as $field) {
-            $configValues[] = $writerConfig[$field] ?? '_none_';
+        foreach ($readerClass::getDefaultConfigForUniqueKeys() as $field => $value) {
+            $configValues[] = $writerConfig[$field] ?? $value;
         }
         return sha1(json_encode($configValues));
     }

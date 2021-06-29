@@ -18,11 +18,12 @@ interface ReaderInterface
     public function __construct(array $configuration = null);
 
     /**
-     * Returns the names of the configuration keys which determine the source of the reader.
+     * Returns an array. All array keys make the reader unique for a source e.g. database table or file name.
+     * The array values are the default values for the writer.
      *
      * @return array
      */
-    public static function getUniqueConfigKeys(): array;
+    public static function getDefaultConfigForUniqueKeys(): array;
 
     /**
      * @param Filter $filter

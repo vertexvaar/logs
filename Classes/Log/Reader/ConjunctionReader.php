@@ -36,7 +36,7 @@ class ConjunctionReader implements ReaderInterface
     /**
      * @return array
      */
-    public static function getUniqueConfigKeys(): array
+    public static function getDefaultConfigForUniqueKeys(): array
     {
         return [];
     }
