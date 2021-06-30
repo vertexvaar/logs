@@ -18,14 +18,12 @@ use function rename;
 use function sha1;
 use function strpos;
 use function substr;
-use function trim;
 use function uniqid;
 use function unlink;
 
 class DeprecationController extends ActionController
 {
-    private const STATIC_PREFIX = 'component="TYPO3.CMS.deprecations":'
-    . ' Core: Error handler (BE): TYPO3 Deprecation Notice:';
+    private const STATIC_PREFIX = ' component="TYPO3.CMS.deprecations":';
 
     public function filterAction(): void
     {
@@ -35,16 +33,25 @@ class DeprecationController extends ActionController
         // Counts and messages are collected separately for easier sorting.
         $deprecations = [];
         $count = [];
-        while ($line = fgets($stream)) {
-            $line = trim($line);
+        $current = fgets($stream);
+        while ($peek = fgets($stream)) {
+            $line = $current;
             $pos = strpos($line, self::STATIC_PREFIX);
             if (false !== $pos) {
-                $line = substr($line, $pos + 87);
-                $line = trim($line);
+                $line = substr($line, $pos + 36);
+            }
+            while (true) {
+                $peekPos = strpos($peek, self::STATIC_PREFIX);
+                if (false !== $peekPos) {
+                    break;
+                }
+                $line .= $peek;
+                $peek = fgets($stream);
             }
             $hash = sha1($line);
             $deprecations[$hash] = $line;
             $count[$hash]++;
+            $current = $peek;
         }
         fclose($stream);
 
@@ -54,7 +61,7 @@ class DeprecationController extends ActionController
         foreach ($deprecations as $hash => $message) {
             $deprecations[$hash] = [
                 'message' => $message,
-                'count' => $count[$hash]
+                'count' => $count[$hash],
             ];
         }
 
@@ -84,21 +91,29 @@ class DeprecationController extends ActionController
         $oldStream = fopen($file, 'rb');
 
         $count = 0;
-        while ($line = fgets($oldStream)) {
-            if (empty($line)) {
-                continue;
-            }
-            $probe = trim($line);
+        $current = fgets($oldStream);
+        while ($peek = fgets($oldStream)) {
+            $content = $current;
+            $probe = $current;
             $pos = strpos($probe, self::STATIC_PREFIX);
             if (false !== $pos) {
-                $probe = substr($probe, $pos + 87);
-                $probe = trim($probe);
+                $probe = substr($probe, $pos + 36);
             }
+            while (true) {
+                $peekPos = strpos($peek, self::STATIC_PREFIX);
+                if (false !== $peekPos) {
+                    break;
+                }
+                $probe .= $peek;
+                $content .= $peek;
+                $peek = fgets($oldStream);
+            }
+            $current = $peek;
             if (sha1($probe) === $hash) {
                 $count++;
                 continue;
             }
-            fwrite($newStream, $line);
+            fwrite($newStream, $content);
         }
 
         fclose($newStream);
