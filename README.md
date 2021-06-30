@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Finally, a backend module to read from the TYPO3 logging API.
+Finally, a backend module to read from the TYPO3 logging API **and** a deprecation log reader.
 
 Notice: This extension currently supports just log tables.
 If you need a special log reader (e.g. file or syslog) feel free

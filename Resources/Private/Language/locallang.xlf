@@ -60,12 +60,28 @@
 			<trans-unit id="actions">
 				<source>Actions</source>
 			</trans-unit>
+			<trans-unit id="deprecations">
+				<source>Deprecations</source>
+			</trans-unit>
 
 			<trans-unit id="delete">
 				<source>Delete</source>
 			</trans-unit>
 			<trans-unit id="delete_alike">
 				<source>Delete all alike</source>
+			</trans-unit>
+			<trans-unit id="count">
+				<source>Count</source>
+			</trans-unit>
+			<trans-unit id="deleted_count">
+				<source>Delete %d lines</source>
+			</trans-unit>
+
+			<trans-unit id="error">
+				<source>Error</source>
+			</trans-unit>
+			<trans-unit id="error.log_file_not_writable">
+				<source>Could not create a new log file</source>
 			</trans-unit>
 		</body>
 	</file>

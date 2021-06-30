@@ -1,0 +1,32 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" xmlns:logs="http://typo3.org/ns/CoStack/Logs/ViewHelpers" data-namespace-typo3-fluid="true">
+	<h1>
+		<f:translate extensionName="logs" key="deprecations">deprecations</f:translate>
+		({deprecations -> f:count()})
+	</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<f:translate extensionName="logs" key="count">count</f:translate>
+				</th>
+				<th>
+					<f:translate extensionName="logs" key="filter.message">message</f:translate>
+				</th>
+				<th>
+					<f:translate extensionName="logs" key="actions">actions</f:translate>
+				</th>
+			</tr>
+		</thead>
+		<f:for each="{deprecations}" as="deprecation" key="hash">
+			<tr>
+				<td>{deprecation.count}</td>
+				<td>{deprecation.message}</td>
+				<td>
+					<f:link.action title="{f:translate(id:'delete')}" action="delete" arguments="{hash: hash}" class="btn btn-default">
+						<core:icon identifier="actions-delete" />
+					</f:link.action>
+				</td>
+			</tr>
+		</f:for>
+	</table>
+</html>
