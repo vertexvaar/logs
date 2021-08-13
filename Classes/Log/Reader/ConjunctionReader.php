@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CoStack\Logs\Log\Reader;
 
 use CoStack\Logs\Domain\Model\Filter;
@@ -56,11 +58,11 @@ class ConjunctionReader implements ReaderInterface
         $direction = Filter::SORTING_ASC === $filter->getOrderDirection() ? -1 : 1;
         usort(
             $logs,
-            function ($left, $right) use ($orderField, $direction) {
+            static function ($left, $right) use ($orderField, $direction) {
                 return $direction
                        * strcmp(
-                           ObjectAccess::getProperty($right, $orderField),
-                           ObjectAccess::getProperty($left, $orderField)
+                           (string)ObjectAccess::getProperty($right, $orderField),
+                           (string)ObjectAccess::getProperty($left, $orderField)
                        );
             }
         );

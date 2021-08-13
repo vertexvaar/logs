@@ -41,6 +41,9 @@ class DeprecationController extends ActionController
                 $line = substr($line, $pos + 36);
             }
             while (true) {
+                if ($peek === false) {
+                    break;
+                }
                 $peekPos = strpos($peek, self::STATIC_PREFIX);
                 if (false !== $peekPos) {
                     break;
@@ -100,6 +103,9 @@ class DeprecationController extends ActionController
                 $probe = substr($probe, $pos + 36);
             }
             while (true) {
+                if ($peek === false) {
+                    break;
+                }
                 $peekPos = strpos($peek, self::STATIC_PREFIX);
                 if (false !== $peekPos) {
                     break;
