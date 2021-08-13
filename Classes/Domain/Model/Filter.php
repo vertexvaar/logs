@@ -29,12 +29,12 @@ class Filter
     /**
      * @var int
      */
-    protected $fromTime = 0;
+    protected $fromTime = null;
 
     /**
      * @var int
      */
-    protected $toTime = 0;
+    protected $toTime = null;
 
     /**
      * @var bool
