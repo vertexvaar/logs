@@ -66,171 +66,108 @@ class Filter
      */
     protected $orderDirection = self::SORTING_DESC;
 
-    /**
-     * @return string
-     */
     public function getRequestId(): string
     {
         return $this->requestId;
     }
 
-    /**
-     * @param string $requestId
-     */
-    public function setRequestId(string $requestId)
+    public function setRequestId(string $requestId): void
     {
         $this->requestId = $requestId;
     }
 
-    /**
-     * @return string
-     */
     public function getLevel(): string
     {
         return $this->level;
     }
 
-    /**
-     * @param string $level
-     */
-    public function setLevel(string $level)
+    public function setLevel(string $level): void
     {
         $this->level = $level;
     }
 
-    /**
-     * @return int
-     */
     public function getFromTime(): ?int
     {
         return $this->fromTime;
     }
 
-    /**
-     * @param int $fromTime
-     */
-    public function setFromTime(int $fromTime = null)
+    public function setFromTime(int $fromTime = null): void
     {
         $this->fromTime = $fromTime;
     }
 
-    /**
-     * @return int
-     */
     public function getToTime(): ?int
     {
         return $this->toTime;
     }
 
-    /**
-     * @param int $toTime
-     */
-    public function setToTime(int $toTime = null)
+    public function setToTime(int $toTime = null): void
     {
         $this->toTime = $toTime;
     }
 
-    /**
-     * @return bool
-     */
     public function isShowData(): bool
     {
         return $this->showData;
     }
 
-    /**
-     * @param bool $showData
-     */
-    public function setShowData(bool $showData)
+    public function setShowData(bool $showData): void
     {
         $this->showData = $showData;
     }
 
-    /**
-     * @return string
-     */
     public function getComponent(): string
     {
         return $this->component;
     }
 
-    /**
-     * @param string $component
-     */
-    public function setComponent(string $component)
+    public function setComponent(string $component): void
     {
         $this->component = $component;
     }
 
-    /**
-     * @return bool
-     */
     public function isFullMessage(): bool
     {
         return $this->fullMessage;
     }
 
-    /**
-     * @param bool $fullMessage
-     */
-    public function setFullMessage(bool $fullMessage)
+    public function setFullMessage(bool $fullMessage): void
     {
         $this->fullMessage = $fullMessage;
     }
 
-    /**
-     * @return int
-     */
     public function getLimit(): int
     {
         return $this->limit;
     }
 
-    /**
-     * @param int $limit
-     */
-    public function setLimit(int $limit)
+    public function setLimit(int $limit): void
     {
         $this->limit = $limit;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderField(): string
     {
         return $this->orderField;
     }
 
-    /**
-     * @param string $orderField
-     */
-    public function setOrderField(string $orderField)
+    public function setOrderField(string $orderField): void
     {
         if (in_array($orderField, array_keys($this->getOrderFields()))) {
             $this->orderField = $orderField;
         }
     }
 
-    /**
-     * @return string
-     */
     public function getOrderDirection(): string
     {
         return $this->orderDirection;
     }
 
-    /**
-     * @param string $orderDirection
-     */
-    public function setOrderDirection(string $orderDirection)
+    public function setOrderDirection(string $orderDirection): void
     {
         $this->orderDirection = $orderDirection;
     }
 
-    /**
-     * @return array
-     */
     public function getLogLevels(): array
     {
         return [
@@ -245,9 +182,6 @@ class Filter
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getOrderFields(): array
     {
         return [
@@ -258,9 +192,6 @@ class Filter
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getOrderDirections(): array
     {
         return [
