@@ -27,14 +27,14 @@ class Filter
     protected $level = LogLevel::NOTICE;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $fromTime = null;
+    protected $fromTime;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $toTime = null;
+    protected $toTime;
 
     /**
      * @var bool
