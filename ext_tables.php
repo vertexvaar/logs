@@ -1,5 +1,5 @@
 <?php
-call_user_func(static function () {
+(static function () {
     $configuration = (array)@unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['logs']);
 
     if (empty($configuration['moduleConfig'])) {
@@ -23,4 +23,4 @@ call_user_func(static function () {
             ]
         );
     }
-});
+})();
