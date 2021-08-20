@@ -155,7 +155,7 @@ class Filter
 
     public function setOrderField(string $orderField): void
     {
-        if (in_array($orderField, array_keys($this->getOrderFields()))) {
+        if (array_key_exists($orderField, $this->getOrderFields())) {
             $this->orderField = $orderField;
         }
     }
