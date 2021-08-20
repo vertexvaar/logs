@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CoStack\Logs\Log\Reader;
 
 use CoStack\Logs\Domain\Model\Filter;

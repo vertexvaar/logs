@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CoStack\Logs\Log\Eraser;
 
 use CoStack\Logs\Domain\Model\Log;

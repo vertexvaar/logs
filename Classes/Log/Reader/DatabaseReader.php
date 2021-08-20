@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CoStack\Logs\Log\Reader;
 
 use CoStack\Logs\Domain\Model\Filter;
@@ -99,11 +101,11 @@ class DatabaseReader implements ReaderInterface
             $query->andWhere($constraint);
         }
         $fromTime = $filter->getFromTime();
-        if (!empty($fromTime)) {
+        if ($fromTime !== null) {
             $query->andWhere($query->expr()->gte(Log::FIELD_TIME_MICRO, $query->createNamedParameter($fromTime)));
         }
         $toTime = $filter->getToTime();
-        if (!empty($toTime)) {
+        if ($toTime !== null) {
             // Add +1 to the timestamp to ignore additional microseconds when comparing. UX stuff, you know ;)
             $query->andWhere($query->expr()->lte(Log::FIELD_TIME_MICRO, $query->createNamedParameter($toTime + 1)));
         }
