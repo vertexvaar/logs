@@ -42,7 +42,7 @@
 				<f:if condition="{filter.showData}">
 					<td>{log.data -> f:debug(inline:'true')}</td>
 				</f:if>
-				<td>
+				<td style="white-space: nowrap">
 					<f:link.action title="{f:translate(id:'delete')}" action="delete" arguments="{requestId:log.requestId,timeMicro:log.timeMicro,component:log.component,level:log.level,message:log.message}" class="btn btn-default">
 						<core:icon identifier="actions-delete" />
 					</f:link.action>
