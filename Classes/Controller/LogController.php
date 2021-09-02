@@ -16,9 +16,6 @@ use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 
-/**
- * Class LogController
- */
 class LogController extends ActionController
 {
     /**

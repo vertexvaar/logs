@@ -18,9 +18,6 @@ use function json_decode;
 use function strlen;
 use function substr;
 
-/**
- * Class DatabaseReader
- */
 class DatabaseReader implements ReaderInterface
 {
     /**

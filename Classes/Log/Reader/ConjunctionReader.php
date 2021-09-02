@@ -14,9 +14,6 @@ use function array_slice;
 use function strcmp;
 use function usort;
 
-/**
- * Class ConjunctionReader
- */
 class ConjunctionReader implements ReaderInterface
 {
     /**

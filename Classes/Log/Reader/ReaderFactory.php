@@ -11,9 +11,6 @@ use function is_array;
 use function json_encode;
 use function sha1;
 
-/**
- * Class ReaderFactory
- */
 class ReaderFactory
 {
     protected const WRITER_READER_MAPPING = [

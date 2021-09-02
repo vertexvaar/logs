@@ -7,9 +7,6 @@ namespace CoStack\Logs\Log\Reader;
 use CoStack\Logs\Domain\Model\Filter;
 use CoStack\Logs\Domain\Model\Log;
 
-/**
- * Interface ReaderInterface
- */
 interface ReaderInterface
 {
     /**

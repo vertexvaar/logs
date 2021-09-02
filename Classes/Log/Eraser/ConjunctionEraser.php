@@ -7,9 +7,6 @@ namespace CoStack\Logs\Log\Eraser;
 use CoStack\Logs\Domain\Model\Log;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class ConjunctionEraser
- */
 class ConjunctionEraser implements EraserInterface
 {
     /**

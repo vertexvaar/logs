@@ -6,9 +6,6 @@ namespace CoStack\Logs\Log\Eraser;
 
 use CoStack\Logs\Domain\Model\Log;
 
-/**
- * Interface EraserInterface
- */
 interface EraserInterface
 {
     /**

@@ -6,9 +6,6 @@ namespace CoStack\Logs\Domain\Model;
 
 use TYPO3\CMS\Core\Log\LogLevel;
 
-/**
- * Class Log
- */
 class Log
 {
     public const FIELD_REQUEST_ID = 'request_id';

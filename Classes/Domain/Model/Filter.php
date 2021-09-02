@@ -7,9 +7,6 @@ namespace CoStack\Logs\Domain\Model;
 use Psr\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * Class Filter
- */
 class Filter
 {
     public const SORTING_DESC = 'DESC';
