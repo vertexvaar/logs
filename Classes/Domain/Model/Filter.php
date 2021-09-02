@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace CoStack\Logs\Domain\Model;
 
-use TYPO3\CMS\Core\Log\LogLevel;
+use Psr\Log\LogLevel;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-
-use function array_keys;
-use function in_array;
 
 /**
  * Class Filter
@@ -173,14 +170,14 @@ class Filter
     public function getLogLevels(): array
     {
         return [
-            LogLevel::EMERGENCY => LogLevel::EMERGENCY . ' (' . \Psr\Log\LogLevel::EMERGENCY . ')',
-            LogLevel::ALERT => LogLevel::ALERT . ' (' . \Psr\Log\LogLevel::ALERT . ')',
-            LogLevel::CRITICAL => LogLevel::CRITICAL . ' (' . \Psr\Log\LogLevel::CRITICAL . ')',
-            LogLevel::ERROR => LogLevel::ERROR . ' (' . \Psr\Log\LogLevel::ERROR . ')',
-            LogLevel::WARNING => LogLevel::WARNING . ' (' . \Psr\Log\LogLevel::WARNING . ')',
-            LogLevel::NOTICE => LogLevel::NOTICE . ' (' . \Psr\Log\LogLevel::NOTICE . ')',
-            LogLevel::INFO => LogLevel::INFO . ' (' . \Psr\Log\LogLevel::INFO . ')',
-            LogLevel::DEBUG => LogLevel::DEBUG . ' (' . \Psr\Log\LogLevel::DEBUG . ')',
+            LogLevel::EMERGENCY => '0 - ' . LogLevel::EMERGENCY,
+            LogLevel::ALERT => '1 - ' . LogLevel::ALERT,
+            LogLevel::CRITICAL => '2 - ' . LogLevel::CRITICAL,
+            LogLevel::ERROR => '3 - ' . LogLevel::ERROR,
+            LogLevel::WARNING => '4 - ' . LogLevel::WARNING,
+            LogLevel::NOTICE => '5 - ' . LogLevel::NOTICE,
+            LogLevel::INFO => '6 - ' . LogLevel::INFO,
+            LogLevel::DEBUG => '7 - ' . LogLevel::DEBUG,
         ];
     }
 
