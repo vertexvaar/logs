@@ -41,7 +41,7 @@ class Log
     protected $message = '';
 
     /**
-     * @var array
+     * @var null|array
      */
     protected $data = [];
 
@@ -53,7 +53,7 @@ class Log
      * @param string $component
      * @param int $level
      * @param string $message
-     * @param array $data
+     * @param null|array $data
      */
     public function __construct(
         string $requestId,
@@ -61,7 +61,7 @@ class Log
         string $component,
         int $level,
         string $message,
-        array $data
+        ?array $data
     ) {
         $this->requestId = $requestId;
         $this->timeMicro = $timeMicro;
@@ -160,17 +160,17 @@ class Log
     }
 
     /**
-     * @return array
+     * @return null|array
      */
-    public function getData(): array
+    public function getData(): ?array
     {
         return $this->data;
     }
 
     /**
-     * @param array $data
+     * @param null|array $data
      */
-    public function setData(array $data)
+    public function setData(?array $data)
     {
         $this->data = $data;
     }
