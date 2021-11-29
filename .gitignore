@@ -1,2 +1,3 @@
-.idea
-/vendor
+/.idea
+/.Build
+/composer.lock

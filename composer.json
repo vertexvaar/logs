@@ -15,12 +15,28 @@
         "typo3/cms-core": "^9.5 || ^10.4",
         "psr/log": "^1.0"
     },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin",
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "3.2.x-dev"
         },
         "typo3/cms": {
-            "extension-key": "logs"
+            "extension-key": "logs",
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web",
+            "app-dir": ".Build"
         }
+    },
+    "require-dev": {
+        "typo3/minimal": "^v10.4.0"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "ln -snf ../../../../ .Build/Web/typo3conf/ext/logs"
+        ]
     }
 }
